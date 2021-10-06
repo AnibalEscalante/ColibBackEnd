@@ -1,7 +1,7 @@
 import express, { Express } from "express";
-import router from "./rent.network"
+import router from "./user.network"
 
-const rent: Express = express();
-rent.use('/rent', router);
+const user: Express = express();
+user.use('/user', router);
 
-export default rent;
+export default user;

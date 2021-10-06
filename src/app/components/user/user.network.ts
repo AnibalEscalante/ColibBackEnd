@@ -1,14 +1,14 @@
 import express, { Request, Response, Router } from "express";
+import { User } from "src/app/models/user.model";
 import response from "../../modules/reponse.module";
-import controller from "./rent.controller";
-import { Rent } from "@models/rent.model";
+import controller from "./user.controller";
 
 
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
   try {
-    const result: Rent[] = await controller.getRents();
+    const result: User[] = await controller.getUsers();
     response.success(req, res, result);
   }
   catch (error) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: Rent | null = await controller.getRent(id);
+    const result: User | null = await controller.getUser(id);
     response.success(req, res, result);
   }
   catch (error) {
@@ -31,10 +31,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const rent: Rent = req.body;
+  const rent: User = req.body;
   
   try {
-    const result: Rent = await controller.addRent(rent);
+    const result: User = await controller.addUser(rent);
     response.success(req, res, result, 201);
   }
   catch (error) {
@@ -43,26 +43,26 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/user/:id', async (req: Request, res: Response) => {
-  const rent: Rent = req.body;
+/* router.post('/user/:id', async (req: Request, res: Response) => {
+  const rent: User = req.body;
   const id: string = req.params['id'];
 
   try {
-    const result: Rent = await controller.addUserRent(rent, id);
+    const result: User = await controller.addUserUser(rent, id);
     response.success(req, res, result, 201);
   }
   catch (error) {
     console.error(error);
     response.error(req, res, 'Invalid information', 500);
   }
-});
+}); */
 
 router.patch('/:id', async (req: Request, res: Response) => {
-  const rent: Partial<Rent> = req.body;
+  const rent: Partial<User> = req.body;
   const id: string = req.params['id'];
 
   try {
-    const result: Rent | null = await controller.updateRent(id, rent);
+    const result: User | null = await controller.updateUser(id, rent);
     response.success(req, res, result, 200);
   }
   catch (error) {
@@ -71,17 +71,17 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/:id', async (req: Request, res: Response) => {
+/* router.delete('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: Rent | null = await controller.deleteRent(id);
+    const result: User | null = await controller.deleteUser(id);
     response.success(req, res, result, 200);
   }
   catch (error) {
     console.error(error);
     response.error(req, res, 'Invalid information', 500);
   }
-});
+}); */
 
 export default router;
