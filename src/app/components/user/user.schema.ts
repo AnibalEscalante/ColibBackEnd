@@ -9,9 +9,14 @@ const definition: Partial<Record<keyof User, any>> = {
   email: { type: String, required: true, lowercase: true, trim: true },
   password: { type: String, required: true},
   movilPhone: { type: String, required: true, trim: true },
+  idDisciplines: { type: Schema.Types.ObjectId, required: true, ref: 'Discipline', trim: true, autopopulate: true },
+  idSkills: { type: Schema.Types.ObjectId, required: true, ref: 'Skill', trim: true, autopopulate: true },
+  idSavedProjects: { type: Schema.Types.ObjectId, required: true, ref: 'Project', trim: true, autopopulate: true },
+  idRequest: { type: Schema.Types.ObjectId, required: true, ref: 'Request', trim: true, autopopulate: true },
+  idRequestResults: { type: Schema.Types.ObjectId, required: true, ref: 'Request', trim: true, autopopulate: true },
 };
 
 const schema: Schema<User> = new Schema(definition, { timestamps: true });
-/* schema.plugin(mongooseAutoPopulate); */
+schema.plugin(mongooseAutoPopulate);
 
 export default model<User & Document>('User', schema, 'user');
