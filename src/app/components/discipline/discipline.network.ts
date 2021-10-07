@@ -1,14 +1,15 @@
 import express, { Request, Response, Router } from "express";
-import { User } from "src/app/models/user.model";
+import { Discipline } from "src/app/models/discipline.model";
 import response from "../../modules/reponse.module";
-import controller from "./user.controller";
+import controller from "./discipline.controller";
+
 
 
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
   try {
-    const result: User[] = await controller.getUsers();
+    const result: Discipline[] = await controller.getDisciplines();
     response.success(req, res, result);
   }
   catch (error) {
@@ -21,7 +22,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: User | null = await controller.getUser(id);
+    const result: Discipline | null = await controller.getDiscipline(id);
     response.success(req, res, result);
   }
   catch (error) {
@@ -31,10 +32,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const user: User = req.body;
+  const discipline: Discipline = req.body;
   
   try {
-    const result: User = await controller.addUser(user);
+    const result: Discipline = await controller.addDiscipline(discipline);
     response.success(req, res, result, 201);
   }
   catch (error) {
@@ -43,13 +44,12 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-
 router.patch('/:id', async (req: Request, res: Response) => {
-  const user: Partial<User> = req.body;
+  const discipline: Partial<Discipline> = req.body;
   const id: string = req.params['id'];
 
   try {
-    const result: User | null = await controller.updateUser(id, user);
+    const result: Discipline | null = await controller.updateDiscipline(id, discipline);
     response.success(req, res, result, 200);
   }
   catch (error) {
@@ -57,5 +57,6 @@ router.patch('/:id', async (req: Request, res: Response) => {
     response.error(req, res, 'Invalid information', 500);
   }
 });
+
 
 export default router;
