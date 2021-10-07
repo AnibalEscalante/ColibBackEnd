@@ -1,6 +1,6 @@
 import { Discipline } from "./discipline.model";
 import { Skill } from "./skill.model";
-import { Request } from "./request.model";
+import { RequestC } from "./request.model";
 import { Project } from "./project.model";
 
 export interface User {
@@ -14,8 +14,8 @@ export interface User {
     idSkills: Skill[];
     idSavedProjects: Project[];
     idMyProjects: Project[];
-    idRequest: Request[];
-    idRequestResults: Request[];
+    idRequest: RequestC[];
+    idRequestResults: RequestC[];
     updateAt: Date;
     createdAt: Date;
   }
