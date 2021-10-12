@@ -14,6 +14,6 @@ const definition: Partial<Record<keyof Project, any>> = {
 };
 
 const schema: Schema<Project> = new Schema(definition, { timestamps: true });
-/* schema.plugin(mongooseAutoPopulate); */
+schema.plugin(mongooseAutoPopulate);
 
 export default model<Project & Document>('Project', schema, 'project');
