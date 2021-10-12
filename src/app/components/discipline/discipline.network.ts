@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { Discipline } from "src/app/models/discipline.model";
+import { Discipline } from "../../models/discipline.model";
 import response from "../../modules/reponse.module";
 import controller from "./discipline.controller";
 

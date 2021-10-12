@@ -9,7 +9,7 @@ function connect(): Promise<typeof mongoose> {
     useFindAndModify: false
   }
   
-  return mongoose.connect(`${process.env['MONGO_URI']}/${process.env['MONGO_DATABASE_NAME']}`, options);
+  return mongoose.connect(`${process.env['MONGO_URI']}${process.env['MONGO_DATABASE_NAME']}`, options);
 }
 
 export default { connect };

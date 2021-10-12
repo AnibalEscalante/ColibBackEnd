@@ -1,5 +1,5 @@
+import { Skill } from "../../models/skill.model";
 import repository from "./skill.repository";
-import { Skill } from "src/app/models/skill.model";
 
 function getSkills(): Promise<Skill[]>{
   return repository.getSkills();

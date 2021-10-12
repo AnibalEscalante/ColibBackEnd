@@ -1,4 +1,4 @@
-import { Skill } from 'src/app/models/skill.model';
+import { Skill } from '../../models/skill.model';
 import model from './skill.schema';
 
 

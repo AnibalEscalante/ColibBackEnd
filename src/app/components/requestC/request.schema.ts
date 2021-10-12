@@ -1,6 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import mongooseAutoPopulate from 'mongoose-autopopulate';
-import { RequestC } from "src/app/models/request.model";
+import { RequestC } from "../../models/request.model";
 
 const definition: Partial<Record<keyof RequestC, any>> = {
   
@@ -10,6 +9,6 @@ const definition: Partial<Record<keyof RequestC, any>> = {
 };
 
 const schema: Schema<RequestC> = new Schema(definition, { timestamps: true });
-/* schema.plugin(mongooseAutoPopulate); */
+schema.plugin(require('mongoose-autopopulate'));
 
-export default model<RequestC & Document>('Request', schema, 'request');
+export default model<RequestC & Document>('RequestC', schema, 'requestc');

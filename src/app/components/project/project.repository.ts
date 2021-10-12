@@ -1,5 +1,5 @@
+import { Project } from '../../models/project.model';
 import model from './project.schema';
-import { Project } from "src/app/models/project.model";
 
 async function getProjects(): Promise<Project[]>{
   return model.find();
