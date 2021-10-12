@@ -1,5 +1,5 @@
+import { RequestC } from "../../models/request.model";
 import repository from "./request.repository";
-import { RequestC } from "src/app/models/request.model";
 
 function getRequests(): Promise<RequestC[]>{
   return repository.getRequests();

@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { Project } from "src/app/models/project.model";
+import { Project } from "../../models/project.model";
 import response from "../../modules/reponse.module";
 import controller from "./project.controller";
 

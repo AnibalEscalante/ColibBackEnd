@@ -1,5 +1,5 @@
+import { RequestC } from '../../models/request.model';
 import model from './request.schema';
-import { RequestC } from "src/app/models/request.model";
 
 async function getRequests(): Promise<RequestC[]>{
   return model.find();

@@ -1,6 +1,5 @@
-import { Schema, model, Document } from "mongoose";
-import mongooseAutoPopulate from 'mongoose-autopopulate';
-import { Project } from "src/app/models/project.model";
+import { Schema, model, Document } from "mongoose"; 
+import { Project } from "../../models/project.model";
 
 const definition: Partial<Record<keyof Project, any>> = {
   
@@ -14,6 +13,6 @@ const definition: Partial<Record<keyof Project, any>> = {
 };
 
 const schema: Schema<Project> = new Schema(definition, { timestamps: true });
-schema.plugin(mongooseAutoPopulate);
+schema.plugin(require('mongoose-autopopulate'));
 
 export default model<Project & Document>('Project', schema, 'project');

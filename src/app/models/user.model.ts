@@ -10,12 +10,12 @@ export interface User {
     email: string;
     password: string;
     movilPhone?: string;
-    idDisciplines: Discipline[];
-    idSkills: Skill[];
-    idSavedProjects: Project[];
-    idMyProjects: Project[];
-    idRequest: RequestC[];
-    idRequestResults: RequestC[];
-    updateAt: Date;
-    createdAt: Date;
+    idDisciplines?: Discipline[];
+    idSkills?: Skill[];
+    idSavedProjects?: Project[];
+    idMyProjects?: Project[];
+    idRequestC?: RequestC[];
+    idRequestResults?: RequestC[];
+    updateAt?: Date;
+    createdAt?: Date;
   }
