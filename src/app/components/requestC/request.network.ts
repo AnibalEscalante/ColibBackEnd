@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { RequestC } from "src/app/models/request.model";
+import { RequestC } from "../../models/request.model";
 import response from "../../modules/reponse.module";
 import controller from "./request.controller";
 

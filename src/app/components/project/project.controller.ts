@@ -1,5 +1,5 @@
+import { Project } from "../../models/project.model";
 import repository from "./project.repository";
-import { Project } from "src/app/models/project.model";
 
 function getProjects(): Promise<Project[]>{
   return repository.getProjects();

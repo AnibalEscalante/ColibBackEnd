@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { Skill } from "src/app/models/skill.model";
+import { Skill } from "../../models/skill.model";
 import response from "../../modules/reponse.module";
 import controller from "./skill.controller";
 

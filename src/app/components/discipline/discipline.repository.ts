@@ -1,4 +1,4 @@
-import { Discipline } from 'src/app/models/discipline.model';
+import { Discipline } from '../../models/discipline.model';
 import model from './discipline.schema';
 
 

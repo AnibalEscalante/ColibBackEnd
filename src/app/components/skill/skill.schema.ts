@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { Skill } from "src/app/models/skill.model";
+import { Skill } from "../../models/skill.model";
 
 const definition: Partial<Record<keyof Skill, any>> = {
   name: { type: String, required: true, lowercase: true, trim: true }

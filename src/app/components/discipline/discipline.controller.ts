@@ -1,5 +1,5 @@
+import { Discipline } from "../../models/discipline.model";
 import repository from "./discipline.repository";
-import { Discipline } from "src/app/models/discipline.model";
 
 function getDisciplines(): Promise<Discipline[]>{
   return repository.getDisciplines();

@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { User } from "src/app/models/user.model";
+import { User } from "../../models/user.model";
 import response from "../../modules/reponse.module";
 import controller from "./user.controller";
 

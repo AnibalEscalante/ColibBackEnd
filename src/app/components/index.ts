@@ -1,4 +1,4 @@
-import { Express, request } from "express";
+import { Express } from "express";
 import discipline from "./discipline";
 import skill from "./skill";
 import project from "./project";

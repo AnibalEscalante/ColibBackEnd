@@ -1,5 +1,5 @@
+import { User } from "../../models/user.model";
 import repository from "./user.repository";
-import { User } from "src/app/models/user.model";
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
