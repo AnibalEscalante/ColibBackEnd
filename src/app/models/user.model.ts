@@ -10,8 +10,8 @@ export interface User {
     movilPhone?: string;
     idDisciplines?: string[] | Discipline[];
     idSkills?: Skill[];
-    idSavedProjects?: Project[];
-    idMyProjects?: Project[];
+    idSavedProjects?: Project[] | string[];
+    idMyProjects?: Project[] | string[];
     idRequestC?: RequestC[];
     idRequestResults?: RequestC[];
     updateAt?: Date;

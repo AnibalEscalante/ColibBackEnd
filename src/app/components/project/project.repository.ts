@@ -21,4 +21,8 @@ async function deleteProject(id: string): Promise<Project | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getProjects, getProject, addProject, updateProject, deleteProject };
+async function deleteProjects(id: string): Promise<Project | null>{
+  return model.findOneAndRemove({_id: id});
+}
+
+export default { getProjects, getProject, addProject, updateProject, deleteProject, deleteProjects};
