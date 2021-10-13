@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { RequestC } from "../../models/request.model";
+import { RequestC } from "../../models/requestC.model";
 
 const definition: Partial<Record<keyof RequestC, any>> = {
   

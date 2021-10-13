@@ -1,7 +1,7 @@
 import express, { Express } from "express";
-import router from "./request.network"
+import router from "./requestC.network"
 
-const user: Express = express();
-user.use('/request', router);
+const requestC: Express = express();
+requestC.use('/requestC', router);
 
-export default user;
+export default requestC;

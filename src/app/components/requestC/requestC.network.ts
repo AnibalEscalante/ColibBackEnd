@@ -1,14 +1,14 @@
 import express, { Request, Response, Router } from "express";
-import { RequestC } from "../../models/request.model";
+import { RequestC } from "../../models/requestC.model";
 import response from "../../modules/reponse.module";
-import controller from "./request.controller";
+import controller from "./requestC.controller";
 
 
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
   try {
-    const result: RequestC[] = await controller.getRequests();
+    const result: RequestC[] = await controller.getRequestsC();
     response.success(req, res, result);
   }
   catch (error) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: RequestC | null = await controller.getRequest(id);
+    const result: RequestC | null = await controller.getRequestC(id);
     response.success(req, res, result);
   }
   catch (error) {
@@ -31,10 +31,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const request: RequestC = req.body;
+  const requestC: RequestC = req.body;
   
   try {
-    const result: RequestC = await controller.addRequest(request);
+    const result: RequestC = await controller.addRequestC(requestC);
     response.success(req, res, result, 201);
   }
   catch (error) {
@@ -44,11 +44,11 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 router.patch('/:id', async (req: Request, res: Response) => {
-  const request: Partial<RequestC> = req.body;
+  const requestC: Partial<RequestC> = req.body;
   const id: string = req.params['id'];
 
   try {
-    const result: RequestC | null = await controller.updateRequest(id, request);
+    const result: RequestC | null = await controller.updateRequestC(id, requestC);
     response.success(req, res, result, 200);
   }
   catch (error) {
@@ -61,7 +61,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: RequestC | null = await controller.deleteRequest(id);
+    const result: RequestC | null = await controller.deleteRequestC(id);
     response.success(req, res, result, 200);
   }
   catch (error) {
