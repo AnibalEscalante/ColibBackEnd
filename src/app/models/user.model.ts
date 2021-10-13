@@ -8,7 +8,7 @@ export interface User {
     name: string;
     lastName: string;
     movilPhone?: string;
-    idDisciplines?: Discipline[];
+    idDisciplines?: string[] | Discipline[];
     idSkills?: Skill[];
     idSavedProjects?: Project[];
     idMyProjects?: Project[];

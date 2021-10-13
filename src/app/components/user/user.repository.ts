@@ -1,3 +1,4 @@
+import { Discipline } from '../../models/discipline.model';
 import { User } from '../../models/user.model';
 import model from './user.schema';
 
@@ -18,5 +19,8 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
+async function deleteUser(id: string): Promise<User | null>{
+  return model.findOneAndRemove({_id: id});
+}
 
-export default { getUsers, getUser, addUser, updateUser};
+export default { getUsers, getUser, addUser, updateUser, deleteUser};
