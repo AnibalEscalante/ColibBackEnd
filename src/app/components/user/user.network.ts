@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from "express";
+import { Discipline } from "../../models/discipline.model";
 import { User } from "../../models/user.model";
 import response from "../../modules/reponse.module";
 import controller from "./user.controller";
@@ -16,6 +17,7 @@ router.get('/all', async (req: Request, res: Response) => {
     response.error(req, res, 'Invalid information', 500);
   }
 });
+
 
 router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
@@ -43,7 +45,6 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-
 router.patch('/:id', async (req: Request, res: Response) => {
   const user: Partial<User> = req.body;
   const id: string = req.params['id'];
@@ -57,5 +58,19 @@ router.patch('/:id', async (req: Request, res: Response) => {
     response.error(req, res, 'Invalid information', 500);
   }
 });
+
+router.delete('/:id', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: User | null = await controller.deleteUser(id);
+    response.success(req, res, result, 200);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 
 export default router;

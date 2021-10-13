@@ -19,4 +19,8 @@ async function updateSkill(id: string, skill: Partial<Skill>): Promise<Skill | n
   return model.findOneAndUpdate({ _id: id }, skill);
 }
 
-export default { getSkills, getSkill, addSkill, updateSkill };
+async function deleteSkill(id: string): Promise<Skill | null>{
+  return model.findOneAndRemove({_id: id});
+}
+
+export default { getSkills, getSkill, addSkill, updateSkill, deleteSkill };

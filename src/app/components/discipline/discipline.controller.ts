@@ -1,4 +1,5 @@
 import { Discipline } from "../../models/discipline.model";
+import userController from "../user/user.controller";
 import repository from "./discipline.repository";
 
 function getDisciplines(): Promise<Discipline[]>{
@@ -17,8 +18,9 @@ function updateDiscipline(id: string, discipline: Partial<Discipline>): Promise<
   return repository.updateDiscipline(id, discipline);
 }
 
+async function deleteDiscipline(id: string): Promise<Discipline | null>{
+  return repository.deleteDiscipline(id);
+}
 
 
-
-
-export default { addDiscipline, getDisciplines, getDiscipline, updateDiscipline};
+export default { addDiscipline, getDisciplines, getDiscipline, updateDiscipline, deleteDiscipline};

@@ -58,5 +58,18 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.delete('/:id', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: Skill | null = await controller.deleteSkill(id);
+    response.success(req, res, result, 200);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 
 export default router;

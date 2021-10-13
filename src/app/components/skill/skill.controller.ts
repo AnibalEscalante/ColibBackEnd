@@ -17,8 +17,12 @@ function updateSkill(id: string, skill: Partial<Skill>): Promise<Skill | null>{
   return repository.updateSkill(id, skill);
 }
 
+async function deleteSkill(id: string): Promise<Skill | null>{
+  return repository.deleteSkill(id);
+}
 
 
 
 
-export default { addSkill, getSkills, getSkill, updateSkill};
+
+export default { addSkill, getSkills, getSkill, updateSkill, deleteSkill};

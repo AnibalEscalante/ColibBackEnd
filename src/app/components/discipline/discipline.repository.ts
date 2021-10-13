@@ -19,4 +19,8 @@ async function updateDiscipline(id: string, discipline: Partial<Discipline>): Pr
   return model.findOneAndUpdate({ _id: id }, discipline);
 }
 
-export default { getDisciplines, getDiscipline, addDiscipline, updateDiscipline };
+async function deleteDiscipline(id: string): Promise<Discipline | null>{
+  return model.findOneAndRemove({_id: id});
+}
+
+export default { getDisciplines, getDiscipline, addDiscipline, updateDiscipline, deleteDiscipline };
