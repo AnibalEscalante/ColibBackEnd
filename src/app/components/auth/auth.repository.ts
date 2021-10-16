@@ -10,4 +10,20 @@ async function getAuthByEmail(email: string): Promise<Auth | null>{
     .populate('authenticated')
 }
 
-export default { addAuth, getAuthByEmail };
+async function getAuthByAuthenticated(authenticated: string): Promise<Auth | null>{
+  return model.findOne({ authenticated });
+}
+
+async function updateEmail(id: string, user: any): Promise<Auth | null>{
+  return model.findOneAndUpdate({ authenticated: id }, { email: user.email });
+}
+
+async function changePassword(id: string, newPassword: string){
+  return model.findOneAndUpdate({ authenticated: id }, { password: newPassword });
+}
+
+async function deleteAuth(id: string){
+  return model.findOneAndRemove({ authenticated: id });
+}
+
+export default { addAuth, getAuthByEmail, getAuthByAuthenticated, updateEmail, changePassword, deleteAuth };

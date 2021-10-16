@@ -1,9 +1,21 @@
 import { Project } from "../../models/project.model";
+import { User } from "../../models/user.model";
 import repository from "./project.repository";
 
-function getProjects(): Promise<Project[]>{
+function getProjects(): Promise<Project[] | null[]>{
   return repository.getProjects();
 }
+
+/* async function getProjects(): Promise<any[]>{
+  const projects: Project[] | null[] = await repository.getProjects();
+  for (let current of projects) {
+    current.
+  }
+  const result = [{
+    projects.
+  }]; 
+  return result;
+} */
 
 function getProject(id: string): Promise<Project | null>{
   return repository.getProject(id);
@@ -21,4 +33,13 @@ async function deleteProject(id: string): Promise<Project | null>{
   return repository.deleteProject(id);
 }
 
-export default { addProject, getProjects, getProject, updateProject, deleteProject};
+async function deleteMyProjects(id: string[]): Promise<Project[] | null> {
+  let result: Project[] | null = [];
+  for (let current of id) {
+    const deleted = await deleteProject(current!);
+    result.push(deleted!);
+  }
+  return result;
+}
+
+export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteMyProjects};

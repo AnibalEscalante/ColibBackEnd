@@ -1,4 +1,3 @@
-import { Discipline } from '../../models/discipline.model';
 import { User } from '../../models/user.model';
 import model from './user.schema';
 
