@@ -8,7 +8,7 @@ const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
   try {
-    const result: Project[] = await controller.getProjects();
+    const result: Project[] | null[] = await controller.getProjects();
     response.success(req, res, result);
   }
   catch (error) {

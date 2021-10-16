@@ -60,4 +60,21 @@ async function getAuthByEmail(auth: Auth): Promise<Auth | null>{
   return repository.getAuthByEmail(auth.email);
 }
 
-export default { userSignIn, login, getAuthByEmail };
+async function getAuthByAuthenticated(authenticated: string): Promise<Auth | null> {
+  return repository.getAuthByAuthenticated(authenticated);
+}
+
+async function updateEmail(id: string, user: any): Promise<Auth | null>{
+  return repository.updateEmail(id, user);
+}
+
+async function changePassword(id: string, newPassword: string){
+  newPassword = await authModule.encrypt(newPassword);
+  return repository.changePassword(id, newPassword);
+}
+
+async function deleteAuth(id: string){
+  return repository.deleteAuth(id);
+}
+
+export default { userSignIn, login, getAuthByEmail, getAuthByAuthenticated, updateEmail, changePassword, deleteAuth };
