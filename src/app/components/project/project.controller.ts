@@ -33,12 +33,6 @@ async function deleteProject(id: string): Promise<Project | null>{
   return repository.deleteProject(id);
 }
 
-<<<<<<< HEAD
-async function deleteMyProjects(id: string[]): Promise<Project[] | null> {
-  let result: Project[] | null = [];
-  for (let current of id) {
-    const deleted = await deleteProject(current!);
-=======
 async function deleteMyProjects(id: string): Promise<Project | null>{
   const property: Project | null = await getProject(id);
   return repository.deleteProjects(id);
@@ -48,14 +42,9 @@ async function deleteProjects(id: string[]): Promise<Project[] | null> {
   let result: Project[] | null= [];
   for (let current of id) {
     const deleted = await deleteMyProjects(current!)
->>>>>>> 3c6ef845a77e3653324ab775cbfeb8575d6f9d44
     result.push(deleted!);
   }
   return result;
 }
 
-<<<<<<< HEAD
-export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteMyProjects};
-=======
 export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteProjects};
->>>>>>> 3c6ef845a77e3653324ab775cbfeb8575d6f9d44
