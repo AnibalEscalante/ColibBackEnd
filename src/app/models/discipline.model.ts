@@ -1,6 +1,6 @@
 export interface Discipline {
-    _id?: string;
-    name: string;
-    updateAt: Date;
-    createdAt: Date;
+  _id?: string;
+  name: string;
+  updateAt: Date;
+  createdAt: Date;
 }

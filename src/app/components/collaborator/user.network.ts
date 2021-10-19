@@ -1,13 +1,13 @@
 import express, { Request, Response, Router } from "express";
-import { User } from "../../models/user.model";
+import { Collaborator } from "../../models/collaborator.model";
 import response from "../../modules/reponse.module";
-import controller from "./user.controller";
+import controller from "./collaborator.controller";
 
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
   try {
-    const result: User[] = await controller.getUsers();
+    const result: Collaborator[] = await controller.getCollaborators();
     response.success(req, res, result);
   }
   catch (error) {
@@ -20,7 +20,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: any | null = await controller.getUser(id);
+    const result: Collaborator | null = await controller.getCollaborator(id);
     response.success(req, res, result);
   }
   catch (error) {
@@ -30,26 +30,12 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.patch('/:id', async (req: Request, res: Response) => {
-  const user: Partial<User> = req.body;
+  const collaborator: Partial<Collaborator> = req.body;
   const id: string = req.params['id'];
 
   try {
-    const result: User | null = await controller.updateUser(id, user);
+    const result: Collaborator | null = await controller.updateCollaborator(id, collaborator);
     response.success(req, res, result, 200);
-  }
-  catch (error) {
-    console.error(error);
-    response.error(req, res, 'Invalid information', 500);
-  }
-});
-
-router.patch('/:id/password', async (req: Request, res: Response) => {
-  const password: { newPassword: string } = req.body;
-  const id: string = req.params['id'];
-
-  try {
-    await controller.changePassword(id, password.newPassword);
-    response.success(req, res, 'Password has been updated', 200);
   }
   catch (error) {
     console.error(error);
@@ -61,7 +47,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: User | null = await controller.deleteUser(id);
+    const result: Collaborator | null = await controller.deleteCollaborator(id);
     response.success(req, res, result, 200);
   }
   catch (error) {
