@@ -43,20 +43,6 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/:id', async (req: Request, res: Response) => {
-  const user: Partial<User> = req.body;
-  const id: string = req.params['id'];
-
-  try {
-    const result: User | null = await controller.updateUser(id, user);
-    response.success(req, res, result, 200);
-  }
-  catch (error) {
-    console.error(error);
-    response.error(req, res, 'Invalid information', 500);
-  }
-});
-
 router.patch('/:id/password', async (req: Request, res: Response) => {
   const password: { newPassword: string } = req.body;
   const id: string = req.params['id'];
