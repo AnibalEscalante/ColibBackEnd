@@ -10,6 +10,10 @@ async function getUser(id: string): Promise<User | null>{
   return repository.getUser(id);
 }
 
+async function getUserByEmail(email: string): Promise<User | null>{
+  return repository.getUserByEmail(email);
+}
+
 function addUser(user: User): Promise<User>{
   return repository.addUser(user);
 }
@@ -29,4 +33,4 @@ async function deleteUser(id: string){
 }
 
 
-export default { addUser, getUsers, getUser, updateUser, changePassword, deleteUser};
+export default { addUser, getUsers, getUser, updateUser, changePassword, deleteUser, getUserByEmail};

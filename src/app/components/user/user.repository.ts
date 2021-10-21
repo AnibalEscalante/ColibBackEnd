@@ -10,6 +10,10 @@ async function getUser(id: string): Promise<User | null>{
   return model.findOne({ _id: id });
 }
 
+async function getUserByEmail(email: string): Promise<User | null>{
+  return model.findOne({ email: email });
+}
+
 async function addUser(user: User): Promise<User>{
   return model.create<User>(user);
 }
@@ -26,4 +30,4 @@ async function deleteUser(id: string): Promise<User | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getUsers, getUser, addUser, updateUser, deleteUser, changePassword};
+export default { getUsers, getUser, addUser, updateUser, deleteUser, changePassword, getUserByEmail};

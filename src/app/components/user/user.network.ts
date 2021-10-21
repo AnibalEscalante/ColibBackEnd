@@ -29,6 +29,19 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/byEmail', async (req: Request, res: Response) => {
+  const email: string = req.body;
+
+  try {
+    const result: User | null = await controller.getUserByEmail(email);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const user: Partial<User> = req.body;
   const id: string = req.params['id'];
