@@ -1,7 +1,7 @@
 import express, { Express } from "express";
-import router from "./user.network"
+import router from "./collaborator.network"
 
-const user: Express = express();
-user.use('/user', router);
+const collaborator: Express = express();
+collaborator.use('/collaboratorr', router);
 
-export default user;
+export default collaborator;

@@ -9,6 +9,10 @@ function getCollaborator(id: string): Promise<Collaborator | null>{
   return repository.getCollaborator(id);
 }
 
+function getCollaboratorByIdUser(id: string): Promise<Collaborator | null>{
+  return repository.getCollaboratorByIdUser(id);
+}
+
 function addCollaborator(collaborator: Collaborator): Promise<Collaborator>{
   return repository.addCollaborator(collaborator);
 }
@@ -22,4 +26,11 @@ function deleteCollaborator(id: string){
 }
 
 
-export default { addCollaborator, getCollaborators, getCollaborator, updateCollaborator, deleteCollaborator};
+export default {
+  addCollaborator,
+  getCollaborators,
+  getCollaborator,
+  updateCollaborator,
+  deleteCollaborator,
+  getCollaboratorByIdUser
+};
