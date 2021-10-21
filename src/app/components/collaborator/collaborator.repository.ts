@@ -1,29 +1,35 @@
-import { User } from '../../models/user.model';
-import model from './user.schema';
+import model from './collaborator.schema';
+import { Collaborator } from '../../models/collaborator.model';
 
-
-async function getUsers(): Promise<User[]>{
+async function getCollaborators(): Promise<Collaborator[]>{
   return model.find();
 }
 
-async function getUser(id: string): Promise<User | null>{
+async function getCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOne({ _id: id });
 }
 
-async function addUser(user: User): Promise<User>{
-  return model.create<User>(user);
+async function getCollaboratorByIdUser(id: string): Promise<Collaborator | null>{
+  return model.findOne({ idUser: id });
 }
 
-async function updateUser(id: string, user: Partial<User>): Promise<User | null>{
-  return model.findOneAndUpdate({ _id: id }, user);
+async function addCollaborator(collaborator: Collaborator): Promise<Collaborator>{
+  return model.create<Collaborator>(collaborator);
 }
 
-async function changePassword(id: string, newPassword: string){
-  return model.findOneAndUpdate({ _id: id }, { password: newPassword });
+async function updateCollaborator(id: string, collaborator: Partial<Collaborator>): Promise<Collaborator | null>{
+  return model.findOneAndUpdate({ _id: id }, collaborator);
 }
 
-async function deleteUser(id: string): Promise<User | null>{
+async function deleteCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getUsers, getUser, addUser, updateUser, deleteUser, changePassword};
+export default {
+  getCollaborators,
+  getCollaborator,
+  addCollaborator,
+  updateCollaborator,
+  deleteCollaborator,
+  getCollaboratorByIdUser
+};
