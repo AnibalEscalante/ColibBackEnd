@@ -18,8 +18,12 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
+async function changePassword(id: string, newPassword: string){
+  return model.findOneAndUpdate({ _id: id }, { password: newPassword });
+}
+
 async function deleteUser(id: string): Promise<User | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getUsers, getUser, addUser, updateUser, deleteUser};
+export default { getUsers, getUser, addUser, updateUser, deleteUser, changePassword};
