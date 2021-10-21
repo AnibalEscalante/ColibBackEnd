@@ -9,6 +9,10 @@ async function getCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOne({ _id: id });
 }
 
+async function getCollaboratorByIdUser(id: string): Promise<Collaborator | null>{
+  return model.findOne({ idUser: id });
+}
+
 async function addCollaborator(collaborator: Collaborator): Promise<Collaborator>{
   return model.create<Collaborator>(collaborator);
 }
@@ -21,4 +25,11 @@ async function deleteCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getCollaborators, getCollaborator, addCollaborator, updateCollaborator, deleteCollaborator};
+export default {
+  getCollaborators,
+  getCollaborator,
+  addCollaborator,
+  updateCollaborator,
+  deleteCollaborator,
+  getCollaboratorByIdUser
+};
