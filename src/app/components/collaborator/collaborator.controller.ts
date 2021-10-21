@@ -1,32 +1,36 @@
-import repository from "./user.repository";
-import projectController from "../project/project.controller";
-import { User } from "../../models/user.model";
+import repository from "./collaborator.repository";
+import { Collaborator } from '../../models/collaborator.model';
 
-function getUsers(): Promise<User[]>{
-  return repository.getUsers();
+function getCollaborators(): Promise<Collaborator[]>{
+  return repository.getCollaborators();
 }
 
-async function getUser(id: string): Promise<User | null>{
-  return repository.getUser(id);
+function getCollaborator(id: string): Promise<Collaborator | null>{
+  return repository.getCollaborator(id);
 }
 
-function addUser(user: User): Promise<User>{
-  return repository.addUser(user);
+function getCollaboratorByIdUser(id: string): Promise<Collaborator | null>{
+  return repository.getCollaboratorByIdUser(id);
 }
 
-async function updateUser(id: string, user: Partial<User>): Promise<User | null>{
-  return repository.updateUser(id, user);
+function addCollaborator(collaborator: Collaborator): Promise<Collaborator>{
+  return repository.addCollaborator(collaborator);
 }
 
-async function changePassword(id: string, newPassword: string){
-  return repository.changePassword(id, newPassword);
+function updateCollaborator(id: string, collaborator: Partial<Collaborator>): Promise<Collaborator | null>{
+  return repository.updateCollaborator(id, collaborator);
 }
 
-async function deleteUser(id: string){
-  const user: User | null = await repository.getUser(id);
-  await projectController.deleteProjects(user?.idMyProjects! as string[]);
-  return repository.deleteUser(id);
+function deleteCollaborator(id: string){
+  return repository.deleteCollaborator(id);
 }
 
 
-export default { addUser, getUsers, getUser, updateUser, changePassword, deleteUser};
+export default {
+  addCollaborator,
+  getCollaborators,
+  getCollaborator,
+  updateCollaborator,
+  deleteCollaborator,
+  getCollaboratorByIdUser
+};
