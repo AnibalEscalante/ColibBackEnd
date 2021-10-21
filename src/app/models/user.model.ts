@@ -7,6 +7,8 @@ export interface User {
   _id?: string;
   name: string;
   lastName: string;
+  email: string;
+  password: string;
   movilPhone?: string;
   idDisciplines?: string[] | Discipline[];
   idSkills?: Skill[];

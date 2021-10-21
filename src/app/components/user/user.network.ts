@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { User } from "../../models/user.model";
+import { User } from '../../models/user.model';
 import response from "../../modules/reponse.module";
 import controller from "./user.controller";
 
@@ -20,7 +20,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: any | null = await controller.getUser(id);
+    const result: User | null = await controller.getUser(id);
     response.success(req, res, result);
   }
   catch (error) {
