@@ -29,11 +29,12 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/byEmail', async (req: Request, res: Response) => {
-  const email: string = req.body;
+router.get('/byEmail/:email/:password', async (req: Request, res: Response) => {
+  const email: string = req.params['email'];
+  const password: string = req.params['password'];
 
   try {
-    const result: User | null = await controller.getUserByEmail(email);
+    const result: string | null = await controller.getUserByEmail(email, password);
     response.success(req, res, result);
   }
   catch (error) {

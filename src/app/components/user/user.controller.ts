@@ -10,8 +10,12 @@ async function getUser(id: string): Promise<User | null>{
   return repository.getUser(id);
 }
 
-async function getUserByEmail(email: string): Promise<User | null>{
-  return repository.getUserByEmail(email);
+async function getUserByEmail(email: string, password: string): Promise<string | null>{
+  const result = await repository.getUserByEmail(email);
+  if(password === result?.password){
+    return result?._id!;
+  }
+  return null;
 }
 
 function addUser(user: User): Promise<User>{
