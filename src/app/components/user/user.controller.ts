@@ -18,6 +18,42 @@ async function getUserByEmail(email: string, password: string): Promise<string |
   return null;
 }
 
+async function getInfoUser(id: string): Promise<any | null>{
+  const user = await repository.getUser(id);
+  const response ={
+    name: user?.name,
+    lastName: user?.lastName,
+    email: user?.email,
+    idDisciplines: user?.idDisciplines,
+    idSkills: user?.idSkills
+  }
+  return response;
+}
+
+async function getUserProjects(id: string): Promise<any | null>{
+  const user = await repository.getUser(id);
+  const response ={
+    idMyProjects: user?.idMyProjects,
+  }
+  return response;
+}
+
+async function getUserSavedProjects(id: string): Promise<any | null>{
+  const user = await repository.getUser(id);
+  const response ={
+    idSavedProjects: user?.idSavedProjects,
+  }
+  return response;
+}
+
+async function getUserRequestsC(id: string): Promise<any | null>{
+  const user = await repository.getUser(id);
+  const response ={
+    idRequestsC: user?.idRequestsC,
+  }
+  return response;
+}
+
 function addUser(user: User): Promise<User>{
   return repository.addUser(user);
 }
@@ -37,4 +73,16 @@ async function deleteUser(id: string){
 }
 
 
-export default { addUser, getUsers, getUser, updateUser, changePassword, deleteUser, getUserByEmail};
+export default {
+  addUser,
+  getUsers,
+  getUser,
+  updateUser,
+  changePassword,
+  deleteUser,
+  getUserByEmail,
+  getInfoUser,
+  getUserProjects,
+  getUserSavedProjects,
+  getUserRequestsC
+};
