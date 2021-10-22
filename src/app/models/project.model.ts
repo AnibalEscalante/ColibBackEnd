@@ -11,7 +11,7 @@ export interface Project {
   finishDate: Date;
   idSkills: Skill[];
   idDisciplines: Discipline[];
-  idCollaborators: User[];
+  idCollaborators: Collaborator[];
   updateAt: Date;
   createdAt: Date;
 }

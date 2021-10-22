@@ -12,7 +12,7 @@ const definition: Partial<Record<keyof User, any>> = {
   idSkills: [{ type: Schema.Types.ObjectId, required: false, ref: 'Skill', trim: true, autopopulate: true }],
   idSavedProjects: [{ type: Schema.Types.ObjectId, required: false, ref: 'Project', trim: true, autopopulate: true }],
   idMyProjects: [{ type: Schema.Types.ObjectId, required: false, ref: 'Project', trim: true, autopopulate: true }],
-  idRequestC: [{ type: Schema.Types.ObjectId, required: false, ref: 'RequestC', trim: true, autopopulate: true }],
+  idRequestsC: [{ type: Schema.Types.ObjectId, required: false, ref: 'RequestC', trim: true, autopopulate: true }],
   idRequestResults: [{ type: Schema.Types.ObjectId, required: false, ref: 'RequestC', trim: true, autopopulate: true }],
 };
 
