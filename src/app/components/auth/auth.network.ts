@@ -10,7 +10,7 @@ router.post('/login', async (req: Request, res: Response) => {
   const auth: Auth = req.body;
 
   try {
-    const result: Auth | null = await controller.login(auth);
+    const result: string | null = await controller.login(auth);
     response.success(req, res, result, 200);
   }
   catch (error) {
