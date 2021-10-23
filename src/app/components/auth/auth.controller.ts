@@ -2,22 +2,30 @@ import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
 import authModule from "../../modules/auth.module";
 import userController from "../user/user.controller";
+import userRepository from "../user/user.repository";
 import repository from "./auth.repository";
 
 async function userSignIn(auth: Auth & User): Promise<Auth>{
-  auth.entity = 'User';
-  auth.createdAt = new Date();
-  auth.updatedAt = auth.createdAt;
-
   try {
     let newUser: User = auth as User;
-    newUser = await userController.addUser(newUser);
-    
-    if(newUser._id && auth.password){
-      auth.authenticated = newUser?._id;
-      auth.password = await authModule.encrypt(auth.password);
-      return repository.addAuth(auth as Auth);
+    /* find email */
+    let registerUser: Auth | null = await repository.getAuthByEmail(auth.email);
+    if(registerUser == null){
+      newUser = await userController.addUser(newUser);
     }
+      if(newUser._id && auth.password){
+        auth.authenticated = newUser?._id;
+        auth.password = await authModule.encrypt(auth.password);
+        console.log(auth);
+        let authentify: Auth = {
+          email: auth.email,
+          password: auth.password,
+          authenticated: auth.authenticated 
+  
+        }
+        return repository.addAuth(authentify);
+      }
+    
   }
   catch(error){
     return Promise.reject();
@@ -25,7 +33,7 @@ async function userSignIn(auth: Auth & User): Promise<Auth>{
   return Promise.reject();
 }
 
-async function login(auth: Auth): Promise<Auth | null>{
+async function login(auth: Auth): Promise<string | null>{
   if(auth.email && auth.password){
     
     try {
@@ -44,8 +52,9 @@ async function login(auth: Auth): Promise<Auth | null>{
           authenticated: authenticated._id
         });
 
+
         console.log(authModule.verify(authFound.token))
-        return authFound;
+        return authFound.token;
       }
     }
     catch (error) {

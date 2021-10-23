@@ -2,7 +2,7 @@ import { Auth } from '../../models/auth.model';
 import model from './auth.schema';
 
 async function addAuth(auth: Auth): Promise<Auth>{
-  return model.create(auth);
+  return model.create(auth as Auth);
 }
 
 async function getAuthByEmail(email: string): Promise<Auth | null>{
