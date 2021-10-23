@@ -29,6 +29,19 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.get('userBy/:id', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: Collaborator | null = await controller.getCollaboratorByIdUser(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const collaborator: Partial<Collaborator> = req.body;
   const id: string = req.params['id'];
