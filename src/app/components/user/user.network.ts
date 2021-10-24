@@ -29,6 +29,45 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/:id/myProjects', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserProjects(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
+router.get('/:id/savedProjects', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserSavedProjects(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
+router.get('/:id/requestsC', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserRequestsC(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const user: Partial<User> = req.body;
   const id: string = req.params['id'];

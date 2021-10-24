@@ -12,7 +12,7 @@ export interface User {
   idSkills?: Skill[];
   idSavedProjects?: Project[] | string[];
   idMyProjects?: Project[] | string[];
-  idRequestC?: RequestC[];
+  idRequestsC?: RequestC[];
   idRequestResults?: RequestC[];
   updateAt?: Date;
   createdAt?: Date;

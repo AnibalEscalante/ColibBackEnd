@@ -22,6 +22,30 @@ async function getUser(id: string): Promise<any | null>{
   return result;
 }
 
+async function getUserProjects(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idMyProjects: user?.idMyProjects
+  };
+  return result;
+}
+
+async function getUserSavedProjects(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idSavedProjects: user?.idSavedProjects
+  };
+  return result;
+}
+
+async function getUserRequestsC(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idRequestsC: user?.idRequestsC
+  };
+  return result;
+}
+
 function addUser(user: User): Promise<User>{
   return repository.addUser(user);
 }
@@ -44,4 +68,14 @@ async function deleteUser(id: string){
 }
 
 
-export default { addUser, getUsers, getUser, updateUser, changePassword, deleteUser};
+export default {
+  addUser,
+  getUsers,
+  getUser,
+  updateUser,
+  changePassword,
+  deleteUser,
+  getUserProjects,
+  getUserSavedProjects,
+  getUserRequestsC
+};
