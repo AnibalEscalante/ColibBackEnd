@@ -1,6 +1,7 @@
 import repository from "./user.repository";
 import authController from "../auth/auth.controller";
 import projectController from "../project/project.controller";
+import collaboratorController from "../collaborator/collaborator.controller";
 import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
 
@@ -63,7 +64,8 @@ async function changePassword(id: string, newPassword: string){
 async function deleteUser(id: string){
   const user: User | null = await repository.getUser(id);
   await authController.deleteAuth(id);
-  await projectController.deleteProjects(user?.idMyProjects! as string[]);
+  await collaboratorController.deleteCollaboratorByIdUser(id);
+  await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
   return repository.deleteUser(id);
 }
 

@@ -21,18 +21,13 @@ async function deleteProject(id: string): Promise<Project | null>{
   return repository.deleteProject(id);
 }
 
-async function deleteMyProjects(id: string): Promise<Project | null>{
-  const property: Project | null = await getProject(id);
-  return repository.deleteProjects(id);
-}
-
-async function deleteProjects(id: string[]): Promise<Project[] | null> {
+async function deleteMyProjects(id: string[]): Promise<Project[] | null> {
   let result: Project[] | null= [];
   for (let current of id) {
-    const deleted = await deleteMyProjects(current!)
+    const deleted = await deleteProject(current!)
     result.push(deleted!);
   }
   return result;
 }
 
-export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteProjects};
+export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteMyProjects};
