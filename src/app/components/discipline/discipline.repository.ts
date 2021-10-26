@@ -1,8 +1,6 @@
 import { Discipline } from '../../models/discipline.model';
 import model from './discipline.schema';
 
-
-
 async function getDisciplines(): Promise<Discipline[]>{
   return model.find();
 }
@@ -23,10 +21,15 @@ async function deleteDiscipline(id: string): Promise<Discipline | null>{
   return model.findOneAndRemove({_id: id});
 }
 
+async function deleteAllDisciplines(): Promise<Discipline[]>{
+  return model.deleteMany();
+}
+
 export default {
   getDisciplines,
   getDiscipline,
   addDiscipline,
   updateDiscipline,
-  deleteDiscipline
+  deleteDiscipline,
+  deleteAllDisciplines
 };

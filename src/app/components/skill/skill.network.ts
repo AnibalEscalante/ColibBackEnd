@@ -3,8 +3,6 @@ import { Skill } from "../../models/skill.model";
 import response from "../../modules/reponse.module";
 import controller from "./skill.controller";
 
-
-
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
@@ -82,6 +80,5 @@ router.delete('/all', async (req: Request, res: Response) => {
     response.error(req, res, 'Invalid information', 500);
   }
 });
-
 
 export default router;

@@ -1,7 +1,6 @@
 import { User } from '../../models/user.model';
 import model from './user.schema';
 
-
 async function getUsers(): Promise<User[]>{
   return model.find();
 }
