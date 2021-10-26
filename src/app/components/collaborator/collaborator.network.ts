@@ -5,6 +5,19 @@ import controller from "./collaborator.controller";
 
 const router: Router = express.Router();
 
+router.post('/', async (req: Request, res: Response) => {
+  const collaborator: Collaborator = req.body;
+  
+  try {
+    const result: Collaborator = await controller.addCollaborator(collaborator);
+    response.success(req, res, result, 201);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.get('/all', async (req: Request, res: Response) => {
   try {
     const result: Collaborator[] = await controller.getCollaborators();
