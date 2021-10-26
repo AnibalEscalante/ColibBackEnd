@@ -23,4 +23,15 @@ async function deleteSkill(id: string): Promise<Skill | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getSkills, getSkill, addSkill, updateSkill, deleteSkill };
+async function deleteAllSkills(): Promise<Skill[]>{
+  return model.deleteMany();
+}
+
+export default {
+  getSkills,
+  getSkill,
+  addSkill,
+  updateSkill,
+  deleteSkill,
+  deleteAllSkills
+};
