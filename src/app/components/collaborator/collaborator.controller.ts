@@ -25,6 +25,10 @@ function deleteCollaborator(id: string){
   return repository.deleteCollaborator(id);
 }
 
+function deleteCollaboratorByIdUser(id: string){
+  return repository.deleteCollaboratorByIdUser(id);
+}
+
 
 export default {
   addCollaborator,
@@ -32,5 +36,6 @@ export default {
   getCollaborator,
   updateCollaborator,
   deleteCollaborator,
-  getCollaboratorByIdUser
+  getCollaboratorByIdUser,
+  deleteCollaboratorByIdUser
 };

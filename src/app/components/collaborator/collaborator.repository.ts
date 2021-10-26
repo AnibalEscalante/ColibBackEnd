@@ -25,11 +25,16 @@ async function deleteCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOneAndRemove({_id: id});
 }
 
+async function deleteCollaboratorByIdUser(id: string): Promise<Collaborator | null>{
+  return model.findOneAndRemove({idUser: id});
+}
+
 export default {
   getCollaborators,
   getCollaborator,
   addCollaborator,
   updateCollaborator,
   deleteCollaborator,
-  getCollaboratorByIdUser
+  getCollaboratorByIdUser,
+  deleteCollaboratorByIdUser
 };

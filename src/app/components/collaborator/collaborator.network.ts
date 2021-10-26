@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { Collaborator } from "../../models/collaborator.model";
+import { Collaborator } from '../../models/collaborator.model';
 import response from "../../modules/reponse.module";
 import controller from "./collaborator.controller";
 

@@ -21,4 +21,10 @@ async function deleteRequestC(id: string): Promise<RequestC | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getRequestsC, getRequestC, addRequestC, updateRequestC, deleteRequestC };
+export default {
+  getRequestsC,
+  getRequestC,
+  addRequestC,
+  updateRequestC,
+  deleteRequestC
+};

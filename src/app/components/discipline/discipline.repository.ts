@@ -23,4 +23,10 @@ async function deleteDiscipline(id: string): Promise<Discipline | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getDisciplines, getDiscipline, addDiscipline, updateDiscipline, deleteDiscipline };
+export default {
+  getDisciplines,
+  getDiscipline,
+  addDiscipline,
+  updateDiscipline,
+  deleteDiscipline
+};

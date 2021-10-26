@@ -26,4 +26,11 @@ async function deleteAuth(id: string){
   return model.findOneAndRemove({ authenticated: id });
 }
 
-export default { addAuth, getAuthByEmail, getAuthByAuthenticated, updateEmail, changePassword, deleteAuth };
+export default {
+  addAuth,
+  getAuthByEmail,
+  getAuthByAuthenticated,
+  updateEmail,
+  changePassword,
+  deleteAuth
+};

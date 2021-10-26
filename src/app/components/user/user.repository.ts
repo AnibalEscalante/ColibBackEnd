@@ -22,4 +22,10 @@ async function deleteUser(id: string): Promise<User | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-export default { getUsers, getUser, addUser, updateUser, deleteUser};
+export default {
+  getUsers,
+  getUser,
+  addUser,
+  updateUser,
+  deleteUser
+};

@@ -21,4 +21,10 @@ async function deleteRequestC(id: string): Promise<RequestC | null>{
   return repository.deleteRequestC(id);
 }
 
-export default { addRequestC, getRequestsC, getRequestC, updateRequestC, deleteRequestC};
+export default {
+  addRequestC,
+  getRequestsC,
+  getRequestC,
+  updateRequestC,
+  deleteRequestC
+};

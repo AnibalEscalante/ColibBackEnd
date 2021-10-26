@@ -21,8 +21,15 @@ async function deleteSkill(id: string): Promise<Skill | null>{
   return repository.deleteSkill(id);
 }
 
+async function deleteAllSkills(): Promise<Skill[]>{
+  return repository.deleteAllSkills();
+}
 
-
-
-
-export default { addSkill, getSkills, getSkill, updateSkill, deleteSkill};
+export default {
+  addSkill,
+  getSkills,
+  getSkill,
+  updateSkill,
+  deleteSkill,
+  deleteAllSkills
+};
