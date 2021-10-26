@@ -30,4 +30,11 @@ async function deleteMyProjects(id: string[]): Promise<Project[] | null> {
   return result;
 }
 
-export default { addProject, getProjects, getProject, updateProject, deleteProject, deleteMyProjects};
+export default {
+  addProject,
+  getProjects,
+  getProject,
+  updateProject,
+  deleteProject,
+  deleteMyProjects
+};

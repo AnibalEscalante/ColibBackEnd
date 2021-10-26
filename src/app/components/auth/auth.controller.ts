@@ -2,8 +2,9 @@ import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
 import authModule from "../../modules/auth.module";
 import userController from "../user/user.controller";
-import userRepository from "../user/user.repository";
 import repository from "./auth.repository";
+import { Collaborator } from '../../models/collaborator.model';
+import collaboratorController from "../collaborator/collaborator.controller";
 
 async function userSignIn(auth: Auth & User): Promise<Auth>{
   try {
@@ -16,13 +17,18 @@ async function userSignIn(auth: Auth & User): Promise<Auth>{
       if(newUser._id && auth.password){
         auth.authenticated = newUser?._id;
         auth.password = await authModule.encrypt(auth.password);
-        console.log(auth);
         let authentify: Auth = {
           email: auth.email,
           password: auth.password,
           authenticated: auth.authenticated 
   
         }
+        let newCollaborator: Collaborator = {
+          name: newUser.name,
+          lastName: newUser.lastName,
+          idUser: newUser._id
+        }
+        collaboratorController.addCollaborator(newCollaborator);
         return repository.addAuth(authentify);
       }
     
@@ -86,4 +92,11 @@ async function deleteAuth(id: string){
   return repository.deleteAuth(id);
 }
 
-export default { userSignIn, login, getAuthByEmail, getAuthByAuthenticated, updateEmail, changePassword, deleteAuth };
+export default {
+  userSignIn,
+  login, getAuthByEmail,
+  getAuthByAuthenticated,
+  updateEmail,
+  changePassword,
+  deleteAuth
+};

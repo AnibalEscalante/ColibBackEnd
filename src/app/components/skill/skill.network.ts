@@ -71,5 +71,17 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.delete('/all', async (req: Request, res: Response) => {
+
+  try {
+    const result: Skill[] = await controller.deleteAllSkills();
+    response.success(req, res, result, 200);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 
 export default router;

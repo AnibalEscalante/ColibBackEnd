@@ -23,4 +23,10 @@ async function deleteDiscipline(id: string): Promise<Discipline | null>{
 }
 
 
-export default { addDiscipline, getDisciplines, getDiscipline, updateDiscipline, deleteDiscipline};
+export default {
+  addDiscipline,
+  getDisciplines,
+  getDiscipline,
+  updateDiscipline,
+  deleteDiscipline
+};
