@@ -1,8 +1,6 @@
 import { Skill } from '../../models/skill.model';
 import model from './skill.schema';
 
-
-
 async function getSkills(): Promise<Skill[]>{
   return model.find();
 }

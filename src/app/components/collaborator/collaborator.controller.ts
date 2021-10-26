@@ -29,7 +29,6 @@ function deleteCollaboratorByIdUser(id: string){
   return repository.deleteCollaboratorByIdUser(id);
 }
 
-
 export default {
   addCollaborator,
   getCollaborators,

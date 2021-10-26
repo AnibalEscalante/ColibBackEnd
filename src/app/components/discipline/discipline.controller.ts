@@ -1,5 +1,4 @@
 import { Discipline } from "../../models/discipline.model";
-import userController from "../user/user.controller";
 import repository from "./discipline.repository";
 
 function getDisciplines(): Promise<Discipline[]>{
@@ -22,11 +21,15 @@ async function deleteDiscipline(id: string): Promise<Discipline | null>{
   return repository.deleteDiscipline(id);
 }
 
+async function deleteAllDisciplines(): Promise<Discipline[]>{
+  return repository.deleteAllDisciplines();
+}
 
 export default {
   addDiscipline,
   getDisciplines,
   getDiscipline,
   updateDiscipline,
-  deleteDiscipline
+  deleteDiscipline,
+  deleteAllDisciplines
 };

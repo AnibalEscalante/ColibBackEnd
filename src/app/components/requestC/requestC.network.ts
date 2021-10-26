@@ -3,7 +3,6 @@ import { RequestC } from "../../models/requestC.model";
 import response from "../../modules/reponse.module";
 import controller from "./requestC.controller";
 
-
 const router: Router = express.Router();
 
 router.get('/all', async (req: Request, res: Response) => {
