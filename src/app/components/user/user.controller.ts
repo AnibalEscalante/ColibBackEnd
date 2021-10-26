@@ -62,10 +62,16 @@ async function changePassword(id: string, newPassword: string){
 }
 
 async function deleteUser(id: string){
-  const user: User | null = await repository.getUser(id);
+  const user = await repository.getUser(id);
   await authController.deleteAuth(id);
   await collaboratorController.deleteCollaboratorByIdUser(id);
-  await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
+  const projects = await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
+  const userUpdated: User = {
+    name: user?.name!,
+    lastName: user?.lastName!,
+    idMyProjects: projects!
+  }
+  await repository.updateUser(id, userUpdated);
   return repository.deleteUser(id);
 }
 
