@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from "express";
+import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
 import response from "../../modules/reponse.module";
 import controller from "./user.controller";
@@ -69,7 +70,7 @@ router.get('/:id/requestsC', async (req: Request, res: Response) => {
 });
 
 router.patch('/:id', async (req: Request, res: Response) => {
-  const user: Partial<User> = req.body;
+  const user: Partial<User & Auth> = req.body;
   const id: string = req.params['id'];
 
   try {
