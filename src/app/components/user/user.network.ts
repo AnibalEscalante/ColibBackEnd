@@ -82,7 +82,7 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/:id/password', async (req: Request, res: Response) => {
+router.patch('/:id', async (req: Request, res: Response) => {
   const password: { newPassword: string } = req.body;
   const id: string = req.params['id'];
 
