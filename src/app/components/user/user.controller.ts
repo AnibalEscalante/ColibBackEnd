@@ -51,9 +51,11 @@ function addUser(user: User): Promise<User>{
   return repository.addUser(user);
 }
 
-async function updateUser(id: string, user: Partial<User>): Promise<User | null>{
-  const updated = repository.updateUser(id, user);
-  await authController.updateEmail(id, user);
+async function updateUser(id: string, user: Partial<User & Auth>): Promise<User | null>{
+  const updated = repository.updateUser(id, user as User);
+  if (user.email) {
+    await authController.updateEmail(id, user as Auth);
+  }
   return updated;
 }
 
