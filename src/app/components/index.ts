@@ -6,6 +6,8 @@ import user from "./user";
 import requestC from "./requestC";
 import collaborator from "./collaborator";
 import auth from "./auth";
+import message from "./message";
+import contact from "./contact";
 
 const components: Express[] = [
     auth,
@@ -14,7 +16,9 @@ const components: Express[] = [
     skill,
     discipline,
     requestC,
-    collaborator
+    collaborator,
+    message,
+    contact
 ];
 
 export default components
