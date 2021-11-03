@@ -5,7 +5,7 @@ export interface Contact {
   name: string;
   lastName: string;
   idUser: string;
-  idMessages: Message[]
+  idMessages?: Message[]
   updateAt?: Date;
   createdAt?: Date;
 }

@@ -4,6 +4,7 @@ import projectController from "../project/project.controller";
 import collaboratorController from "../collaborator/collaborator.controller";
 import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
+import contactController from "../contact/contact.controller";
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
@@ -67,6 +68,7 @@ async function deleteUser(id: string){
   const user = await repository.getUser(id);
   await authController.deleteAuth(id);
   await collaboratorController.deleteCollaboratorByIdUser(id);
+  await contactController.deleteContactByIdUser(id);
   const projects = await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
   const userUpdated: User = {
     name: user?.name!,

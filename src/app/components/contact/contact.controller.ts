@@ -9,8 +9,23 @@ function getContact(id: string): Promise<Contact | null>{
   return repository.getContact(id);
 }
 
-function getContactByIdUser(id: string): Promise<Contact | null>{
-  return repository.getContactByIdUser(id);
+async function getContactByIdUser(id: string): Promise<Contact[] | null>{
+  const contactList: Contact[] = await repository.getMyContacts(id);
+  let response: Contact[] = [];
+  for (let current of contactList) {
+    const contact: Contact= {
+      name: current.name,
+      lastName: current.lastName,
+      idUser: current.idUser
+    }
+
+    response.push(contact);
+  }
+  return response;
+}
+
+function getMyContacts(id: string): Promise<Contact[]>{
+  return repository.getMyContacts(id);
 }
 
 async function addContact(newContact: Contact): Promise<Contact>{
@@ -40,5 +55,6 @@ export default {
   updateContact,
   deleteContact,
   getContactByIdUser,
+  getMyContacts,
   deleteContactByIdUser
 };
