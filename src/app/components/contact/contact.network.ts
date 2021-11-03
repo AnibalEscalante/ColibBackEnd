@@ -29,11 +29,11 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.get('userBy/:id', async (req: Request, res: Response) => {
-  const id: string = req.params['id'];
+router.get('byUser/:id', async (req: Request, res: Response) => {
+  const idUser: string = req.params['id'];
 
   try {
-    const result: Contact | null = await controller.getContactByIdUser(id);
+    const result: Contact[] | null = await controller.getContactByIdUser(idUser);
     response.success(req, res, result);
   }
   catch (error) {

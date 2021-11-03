@@ -10,8 +10,9 @@ const definition: Partial<Record<keyof User, any>> = {
   idSkills: [{ type: Schema.Types.ObjectId,  ref: 'Skill', trim: true, autopopulate: true }],
   idSavedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project', trim: true, autopopulate: true }],
   idMyProjects: [{ type: Schema.Types.ObjectId, ref: 'Project', trim: true, autopopulate: true }],
-  idRequestsC: [{ type: Schema.Types.ObjectId,  ref: 'RequestC', trim: true, autopopulate: true }],
-  idRequestResults: [{ type: Schema.Types.ObjectId, ref: 'RequestC', trim: true, autopopulate: true }],
+  idRequestsC: [{ type: Schema.Types.ObjectId, ref: 'RequestC', trim: true, autopopulate: true }],
+  idConctacts: [{ type: Schema.Types.ObjectId,  ref: 'Contact', trim: true, autopopulate: true }],
+  idRequestResults: [{ type: Schema.Types.ObjectId, ref: 'RequestC', trim: true, autopopulate: true }]
 };
 
 const schema: Schema<User> = new Schema(definition, { timestamps: true });
