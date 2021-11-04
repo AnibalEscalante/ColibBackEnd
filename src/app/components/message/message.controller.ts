@@ -21,8 +21,10 @@ function deleteMessage(id: string){
   return repository.deleteMessage(id);
 }
 
-function deleteMessageByIdUser(id: string){
-  return repository.deleteMessageByIdUser(id);
+async function deleteMessagesByIdUser(id: string) {
+  await repository.deleteMessagesByIdUserSender(id);
+  await repository.deleteMessagesByIdUserAddressee(id);
+  return;
 }
 
 export default {
@@ -31,5 +33,5 @@ export default {
   getMessage,
   updateMessage,
   deleteMessage,
-  deleteMessageByIdUser
+  deleteMessagesByIdUser
 };

@@ -1,5 +1,6 @@
 import repository from "./contact.repository";
 import { Contact } from '../../models/contact.model';
+import messageController from "../message/message.controller";
 
 function getContacts(): Promise<Contact[]>{
   return repository.getContacts();
@@ -44,8 +45,10 @@ function deleteContact(id: string){
   return repository.deleteContact(id);
 }
 
-function deleteContactByIdUser(id: string){
-  return repository.deleteContactByIdUser(id);
+async function deleteContactByIdUser(id: string) {
+  await messageController.deleteMessagesByIdUser(id);
+  await repository.deleteContactByIdUser(id);
+  return;
 }
 
 export default {

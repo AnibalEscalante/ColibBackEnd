@@ -21,8 +21,12 @@ async function deleteMessage(id: string): Promise<Message | null>{
   return model.findOneAndRemove({_id: id});
 }
 
-async function deleteMessageByIdUser(id: string): Promise<Message | null>{
-  return model.findOneAndRemove({idUserSender: id, idUserAddressee: id});
+async function deleteMessagesByIdUserSender(id: string): Promise<Message[] | null>{
+  return model.deleteMany({idUserSender: id});
+}
+
+async function deleteMessagesByIdUserAddressee(id: string): Promise<Message[] | null>{
+  return model.deleteMany({idUserAddressee: id});
 }
 
 export default {
@@ -31,5 +35,6 @@ export default {
   addMessage,
   updateMessage,
   deleteMessage,
-  deleteMessageByIdUser
+  deleteMessagesByIdUserSender,
+  deleteMessagesByIdUserAddressee
 };
