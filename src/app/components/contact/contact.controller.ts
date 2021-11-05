@@ -46,7 +46,8 @@ function deleteContact(id: string){
 }
 
 async function deleteContactByIdUser(id: string) {
-  await messageController.deleteMessagesByIdUser(id);
+  const contact = await repository.getContact(id);
+  await messageController.deleteMessages(contact?.idSentMessages! as string[], contact?.idRecievedMessages! as string[]);
   await repository.deleteContactByIdUser(id);
   return;
 }

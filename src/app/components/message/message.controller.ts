@@ -21,10 +21,10 @@ function deleteMessage(id: string){
   return repository.deleteMessage(id);
 }
 
-async function deleteMessagesByIdUser(id: string) {
-  await repository.deleteMessagesByIdUserSender(id);
-  await repository.deleteMessagesByIdUserAddressee(id);
-  return;
+async function deleteMessages(idSentMessages: string[], idRecievedMessages: string[]){
+  await repository.deleteMessages(idSentMessages);
+  await repository.deleteMessages(idRecievedMessages);
+  return
 }
 
 export default {
@@ -33,5 +33,5 @@ export default {
   getMessage,
   updateMessage,
   deleteMessage,
-  deleteMessagesByIdUser
+  deleteMessages
 };
