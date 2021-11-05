@@ -17,6 +17,16 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
+async function removeContact(idUser: string, idContact: string): Promise<User | null>{
+  return model.findOneAndUpdate(
+    { _id: idUser },
+    {
+      $pull: {
+        idContacts: { idUser : idContact }
+      }
+    });
+}
+
 async function deleteUser(id: string): Promise<User | null>{
   return model.findOneAndRemove({_id: id});
 }
@@ -26,5 +36,6 @@ export default {
   getUser,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  removeContact
 };

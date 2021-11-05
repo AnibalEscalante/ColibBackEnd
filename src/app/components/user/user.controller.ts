@@ -64,10 +64,19 @@ async function changePassword(id: string, newPassword: string){
   return authController.changePassword(id, newPassword);
 }
 
+async function removeContactOnUsers(id: string) {
+  const users = await repository.getUsers();
+  for (let user of users) {
+    await repository.removeContact(user._id!, id);
+  }
+  return;
+}
+
 async function deleteUser(id: string){
   const user = await repository.getUser(id);
   await authController.deleteAuth(id);
   await collaboratorController.deleteCollaboratorByIdUser(id);
+  await removeContactOnUsers(id);
   await contactController.deleteContactByIdUser(id);
   const projects = await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
   const userUpdated: User = {
@@ -79,7 +88,6 @@ async function deleteUser(id: string){
   return repository.deleteUser(id);
 }
 
-
 export default {
   addUser,
   getUsers,
@@ -89,5 +97,6 @@ export default {
   deleteUser,
   getUserProjects,
   getUserSavedProjects,
+  removeContactOnUsers,
   getUserRequestsC
 };

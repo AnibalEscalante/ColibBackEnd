@@ -2,9 +2,6 @@ import { Schema, model, Document } from "mongoose";
 import { Message } from '../../models/message.model';
 
 const definition: Partial<Record<keyof Message, any>> = {
-  
-  idUserSender: { type: String, required: true },
-  idUserAddressee: { type: String, required: true },
   content: { type: String, required: true }
 };
 
