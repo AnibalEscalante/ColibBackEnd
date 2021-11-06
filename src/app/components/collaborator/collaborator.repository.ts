@@ -21,6 +21,10 @@ async function updateCollaborator(id: string, collaborator: Partial<Collaborator
   return model.findOneAndUpdate({ _id: id }, collaborator);
 }
 
+async function updateCollaboratorByIdUser(id: string, data: Collaborator) {
+  return model.findOneAndUpdate({ idUser: id }, data);
+}
+
 async function deleteCollaborator(id: string): Promise<Collaborator | null>{
   return model.findOneAndRemove({_id: id});
 }
@@ -34,6 +38,7 @@ export default {
   getCollaborator,
   addCollaborator,
   updateCollaborator,
+  updateCollaboratorByIdUser,
   deleteCollaborator,
   getCollaboratorByIdUser,
   deleteCollaboratorByIdUser

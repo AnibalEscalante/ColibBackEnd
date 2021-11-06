@@ -3,8 +3,7 @@ import { Contact } from '../../models/contact.model';
 
 const definition: Partial<Record<keyof Contact, any>> = {
   
-  name: { type: String, required: true, lowercase: true, trim: true },
-  lastName: { type: String, required: true, lowercase: true, trim: true },
+  nickName: { type: String, required: true, trim: true },
   idUser: { type: String, required: true },
   idSentMessages: [{ type: Schema.Types.ObjectId, ref: 'Message', autopopulate: true }],
   idRecievedMessages: [{ type: Schema.Types.ObjectId,  ref: 'Message', autopopulate: true }]

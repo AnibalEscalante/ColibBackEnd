@@ -21,6 +21,10 @@ function updateCollaborator(id: string, collaborator: Partial<Collaborator>): Pr
   return repository.updateCollaborator(id, collaborator);
 }
 
+function updateCollaboratorByIdUser(id: string, data: Collaborator) {
+  return repository.updateCollaboratorByIdUser(id, data);
+}
+
 function deleteCollaborator(id: string){
   return repository.deleteCollaborator(id);
 }
@@ -34,6 +38,7 @@ export default {
   getCollaborators,
   getCollaborator,
   updateCollaborator,
+  updateCollaboratorByIdUser,
   deleteCollaborator,
   getCollaboratorByIdUser,
   deleteCollaboratorByIdUser

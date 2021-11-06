@@ -5,6 +5,8 @@ import collaboratorController from "../collaborator/collaborator.controller";
 import { Auth } from "../../models/auth.model";
 import { User } from "../../models/user.model";
 import contactController from "../contact/contact.controller";
+import { Collaborator } from '../../models/collaborator.model';
+import { Contact } from '../../models/contact.model';
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
@@ -14,6 +16,7 @@ async function getUser(id: string): Promise<any | null>{
   const user: User | null = await repository.getUser(id);
   const auth: Auth | null = await authController.getAuthByAuthenticated(id);
   const result = {
+    nickName: user?.nickName,
     name: user?.name,
     lastName: user?.lastName,
     movilPhone: user?.movilPhone,
@@ -48,16 +51,26 @@ async function getUserRequestsC(id: string): Promise<any | null>{
   return result;
 }
 
-function addUser(user: User): Promise<User>{
-  return repository.addUser(user);
+async function addUser(newUser: User): Promise<User | null> {
+  const user = await repository.getUserByNickName(newUser.nickName);
+  if (user == null) {
+    return repository.addUser(newUser);
+  }
+  return null;
 }
 
 async function updateUser(id: string, user: Partial<User & Auth>): Promise<User | null>{
-  const updated = repository.updateUser(id, user as User);
+  const response = await repository.updateUser(id, user as User);
   if (user.email) {
     await authController.updateEmail(id, user as Auth);
   }
-  return updated;
+  const updated: Collaborator | Contact = {
+    idUser: user._id!,
+    nickName: user.nickName!
+  }
+  await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
+  await contactController.updateContactByIdUser(id, updated as Contact);
+  return response;
 }
 
 async function changePassword(id: string, newPassword: string){
@@ -78,13 +91,7 @@ async function deleteUser(id: string){
   await collaboratorController.deleteCollaboratorByIdUser(id);
   await removeContactOnUsers(id);
   await contactController.deleteContactByIdUser(id);
-  const projects = await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
-  const userUpdated: User = {
-    name: user?.name!,
-    lastName: user?.lastName!,
-    idMyProjects: projects!
-  }
-  await repository.updateUser(id, userUpdated);
+  await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
   return repository.deleteUser(id);
 }
 

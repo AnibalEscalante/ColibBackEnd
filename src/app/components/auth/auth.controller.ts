@@ -8,13 +8,13 @@ import collaboratorController from "../collaborator/collaborator.controller";
 
 async function userSignIn(auth: Auth & User): Promise<Auth>{
   try {
-    let newUser: User = auth as User;
+    let newUser: User | null = auth as User;
     /* find email */
     let registerUser: Auth | null = await repository.getAuthByEmail(auth.email);
     if(registerUser == null){
       newUser = await userController.addUser(newUser);
     }
-      if(newUser._id && auth.password){
+      if(newUser?._id && auth.password){
         auth.authenticated = newUser?._id;
         auth.password = await authModule.encrypt(auth.password);
         let authentify: Auth = {
@@ -24,8 +24,7 @@ async function userSignIn(auth: Auth & User): Promise<Auth>{
   
         }
         let newCollaborator: Collaborator = {
-          name: newUser.name,
-          lastName: newUser.lastName,
+          nickName: newUser.nickName,
           idUser: newUser._id
         }
         collaboratorController.addCollaborator(newCollaborator);

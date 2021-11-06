@@ -3,8 +3,7 @@ import { Collaborator } from '../../models/collaborator.model';
 
 const definition: Partial<Record<keyof Collaborator, any>> = {
   
-  name: { type: String, required: true, lowercase: true, trim: true },
-  lastName: { type: String, required: true, lowercase: true, trim: true },
+  nickName: { type: String, required: true, trim: true },
   idUser: { type: String, required: true}
 };
 

@@ -6,6 +6,7 @@ import { Contact } from './contact.model';
 
 export interface User {
   _id?: string;
+  nickName: string;
   name: string;
   lastName: string;
   movilPhone?: string;
