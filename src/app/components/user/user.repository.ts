@@ -21,12 +21,12 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
-async function removeContact(id: string, idUser: string): Promise<User | null>{
+async function removeContact(id: string, idUserRemove: string): Promise<User | null>{
   return model.findOneAndUpdate(
     { _id: id },
     {
       $pull: {
-        idContacts: { idUser : idUser }
+        idContacts: { idUser : idUserRemove }
       }
     });
 }
