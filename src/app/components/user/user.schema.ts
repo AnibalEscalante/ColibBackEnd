@@ -3,8 +3,9 @@ import { User } from "../../models/user.model";
 
 const definition: Partial<Record<keyof User, any>> = {
   
-  name: { type: String, required: true, lowercase: true, trim: true },
-  lastName: { type: String, required: true, lowercase: true, trim: true },
+  nickName: { type: String, required: true, trim: true },
+  name: { type: String, required: true, trim: true },
+  lastName: { type: String, required: true, trim: true },
   movilPhone: { type: String, trim: true },
   idDisciplines: [{ type: Schema.Types.ObjectId,  ref: 'Discipline', trim: true, autopopulate: true }],
   idSkills: [{ type: Schema.Types.ObjectId,  ref: 'Skill', trim: true, autopopulate: true }],

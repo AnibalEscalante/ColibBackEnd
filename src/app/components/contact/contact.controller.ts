@@ -15,8 +15,7 @@ async function getContactByIdUser(id: string): Promise<Contact[] | null>{
   let response: Contact[] = [];
   for (let current of contactList) {
     const contact: Contact= {
-      name: current.name,
-      lastName: current.lastName,
+      nickName: current.nickName,
       idUser: current.idUser
     }
 
@@ -41,6 +40,10 @@ function updateContact(id: string, contact: Partial<Contact>): Promise<Contact |
   return repository.updateContact(id, contact);
 }
 
+function updateContactByIdUser(id: string, contact: Partial<Contact>): Promise<Contact | null>{
+  return repository.updateContact(id, contact);
+}
+
 function deleteContact(id: string){
   return repository.deleteContact(id);
 }
@@ -57,6 +60,7 @@ export default {
   getContacts,
   getContact,
   updateContact,
+  updateContactByIdUser,
   deleteContact,
   getContactByIdUser,
   getMyContacts,

@@ -9,6 +9,10 @@ async function getUser(id: string): Promise<User | null>{
   return model.findOne({ _id: id });
 }
 
+async function getUserByNickName(nick: string): Promise<User | null>{
+  return model.findOne({ nickName: nick });
+}
+
 async function addUser(user: User): Promise<User>{
   return model.create<User>(user);
 }
@@ -17,12 +21,12 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
-async function removeContact(idUser: string, idContact: string): Promise<User | null>{
+async function removeContact(id: string, idUser: string): Promise<User | null>{
   return model.findOneAndUpdate(
-    { _id: idUser },
+    { _id: id },
     {
       $pull: {
-        idContacts: { idUser : idContact }
+        idContacts: { idUser : idUser }
       }
     });
 }
@@ -34,6 +38,7 @@ async function deleteUser(id: string): Promise<User | null>{
 export default {
   getUsers,
   getUser,
+  getUserByNickName,
   addUser,
   updateUser,
   deleteUser,

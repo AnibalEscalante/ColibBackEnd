@@ -3,7 +3,7 @@ import { Project } from "../../models/project.model";
 
 const definition: Partial<Record<keyof Project, any>> = {
   
-  title: { type: String, required: true, lowercase: true, trim: true },
+  title: { type: String, required: true, trim: true },
   content: { type: String, required: true, trim: true },
   state: { type: String, enum: ['Open','Close'], required: true, trim: true },
   finishDate: { type: Date, required: true},
