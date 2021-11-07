@@ -77,7 +77,15 @@ async function changePassword(id: string, newPassword: string){
   return authController.changePassword(id, newPassword);
 }
 
-async function removeContactOnUsers(id: string) {
+async function removeSavedProject(idUser: string, idProject: string) {
+  return repository.removeSavedProject(idUser, idProject);
+}
+
+async function removeCollaboratingProject(idUser: string, idProject: string) {
+  return repository.removeCollaboratingProject(idUser, idProject);
+}
+
+async function removeContactInUsers(id: string) {
   const users = await repository.getUsers();
   for (let user of users) {
     await repository.removeContact(user._id!, id);
@@ -85,11 +93,20 @@ async function removeContactOnUsers(id: string) {
   return;
 }
 
+async function removeCollaboratorInProjects(id: string) {
+  const projects = await projectController.getProjects();
+  for (let project of projects) {
+    await projectController.removeCollaborator(project?._id!, id);
+  }
+  return;
+}
+
 async function deleteUser(id: string){
   const user = await repository.getUser(id);
   await authController.deleteAuth(id);
+  await removeCollaboratorInProjects(id);
   await collaboratorController.deleteCollaboratorByIdUser(id);
-  await removeContactOnUsers(id);
+  await removeContactInUsers(id);
   await contactController.deleteContactByIdUser(id);
   await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
   return repository.deleteUser(id);
@@ -104,6 +121,9 @@ export default {
   deleteUser,
   getUserProjects,
   getUserSavedProjects,
-  removeContactOnUsers,
+  removeSavedProject,
+  removeCollaboratingProject,
+  removeContactInUsers,
+  removeCollaboratorInProjects,
   getUserRequestsC
 };

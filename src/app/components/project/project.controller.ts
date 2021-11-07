@@ -1,4 +1,5 @@
 import { Project } from "../../models/project.model";
+import userController from "../user/user.controller";
 import repository from "./project.repository";
 
 function getProjects(): Promise<Project[] | null[]>{
@@ -18,12 +19,21 @@ function updateProject(id: string, project: Partial<Project>): Promise<Project |
 }
 
 async function deleteProject(id: string): Promise<Project | null>{
+  const users = await userController.getUsers();
+  for (let user of users) {
+    await userController.removeSavedProject(user._id!, id);
+    await userController.removeCollaboratingProject(user._id!, id);
+  }
   return repository.deleteProject(id);
 }
 
-async function deleteMyProjects(id: string[]): Promise<Project[] | null> {
+async function removeCollaborator(idProject: string, id: string): Promise<Project | null>{
+  return repository.removeCollaborator(idProject, id);
+}
+
+async function deleteMyProjects(ids: string[]): Promise<Project[] | null> {
   let result: Project[] | null= [];
-  for (let current of id) {
+  for (let current of ids) {
     const deleted = await deleteProject(current!)
     result.push(deleted!);
   }
@@ -36,5 +46,6 @@ export default {
   getProject,
   updateProject,
   deleteProject,
+  removeCollaborator,
   deleteMyProjects
 };

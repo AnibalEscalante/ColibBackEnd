@@ -21,6 +21,26 @@ async function updateUser(id: string, user: Partial<User>): Promise<User | null>
   return model.findOneAndUpdate({ _id: id }, user);
 }
 
+async function removeSavedProject(idUser: string, idProject: string): Promise<User | null>{
+  return model.findOneAndUpdate(
+    { _id: idUser },
+    {
+      $pull: {
+        idSavedProjects: { _id : idProject }
+      }
+    });
+}
+
+async function removeCollaboratingProject(idUser: string, idProject: string): Promise<User | null>{
+  return model.findOneAndUpdate(
+    { _id: idUser },
+    {
+      $pull: {
+        idCollaboratingProjects: { _id : idProject }
+      }
+    });
+}
+
 async function removeContact(id: string, idUserRemove: string): Promise<User | null>{
   return model.findOneAndUpdate(
     { _id: id },
@@ -42,5 +62,7 @@ export default {
   addUser,
   updateUser,
   deleteUser,
+  removeSavedProject,
+  removeCollaboratingProject,
   removeContact
 };
