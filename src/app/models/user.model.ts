@@ -14,6 +14,7 @@ export interface User {
   idSkills?: Skill[];
   idSavedProjects?: Project[] | string[];
   idMyProjects?: Project[] | string[];
+  idCollaboratingProjects?: Project[] | string[];
   idRequestsC?: RequestC[];
   idRequestResults?: RequestC[];
   idContacts?: Contact[];
