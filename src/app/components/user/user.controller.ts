@@ -43,6 +43,22 @@ async function getUserSavedProjects(id: string): Promise<any | null>{
   return result;
 }
 
+async function getUserCollabProjects(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idCollaboratingProjects: user?.idCollaboratingProjects
+  };
+  return result;
+}
+
+async function getUserContacts(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idContacts: user?.idContacts
+  };
+  return result;
+}
+
 async function getUserRequestsC(id: string): Promise<any | null>{
   const user: User | null = await repository.getUser(id);
   const result = {
@@ -121,9 +137,11 @@ export default {
   deleteUser,
   getUserProjects,
   getUserSavedProjects,
+  getUserCollabProjects,
   removeSavedProject,
   removeCollaboratingProject,
   removeContactInUsers,
   removeCollaboratorInProjects,
-  getUserRequestsC
+  getUserRequestsC,
+  getUserContacts
 };
