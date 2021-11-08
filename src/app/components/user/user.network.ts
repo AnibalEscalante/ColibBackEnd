@@ -56,6 +56,32 @@ router.get('/:id/savedProjects', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/:id/collabProjects', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserCollabProjects(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
+router.get('/:id/myContacts', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserContacts(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.get('/:id/requestsC', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
