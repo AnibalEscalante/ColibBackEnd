@@ -25,8 +25,12 @@ async function addContact(contact: Contact): Promise<Contact>{
   return model.create<Contact>(contact);
 }
 
-async function updateContact(id: string, collaborator: Partial<Contact>): Promise<Contact | null>{
-  return model.findOneAndUpdate({ _id: id }, collaborator);
+async function updateContact(id: string, contact: Partial<Contact>): Promise<Contact | null>{
+  return model.findOneAndUpdate({ _id: id }, contact);
+}
+
+async function updateContactByIdUser(id: string, contact: Partial<Contact>): Promise<Contact | null>{
+  return model.findOneAndUpdate({ idUser: id }, contact);
 }
 
 async function deleteContact(id: string): Promise<Contact | null>{
@@ -42,6 +46,7 @@ export default {
   getContact,
   addContact,
   updateContact,
+  updateContactByIdUser,
   deleteContact,
   getContactByIdUser,
   getMyContacts,
