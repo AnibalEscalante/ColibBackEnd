@@ -7,6 +7,7 @@ import { User } from "../../models/user.model";
 import contactController from "../contact/contact.controller";
 import { Collaborator } from '../../models/collaborator.model';
 import { Contact } from '../../models/contact.model';
+import { Project } from "../../models/project.model";
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
@@ -25,6 +26,13 @@ async function getUser(id: string): Promise<any | null>{
     email: auth?.email
   };
   return result;
+}
+
+async function addProjectUser(id:string, project: Project & string){
+  const user = await repository.getUser(id);
+  user?.idMyProjects?.push(project);
+  await repository.updateUser(id, user!);
+  return;
 }
 
 async function getUserProjects(id: string): Promise<any | null>{
@@ -143,5 +151,6 @@ export default {
   removeContactInUsers,
   removeCollaboratorInProjects,
   getUserRequestsC,
-  getUserContacts
+  getUserContacts,
+  addProjectUser
 };
