@@ -88,8 +88,8 @@ async function updateUser(id: string, user: Partial<User & Auth>): Promise<User 
   if (user.email) {
     await authController.updateEmail(id, user as Auth);
   }
-  const updated: Collaborator | Contact = {
-    idUser: user._id!,
+  const updated: Partial<Collaborator & Contact> = {
+    idUser: id,
     nickName: user.nickName!
   }
   await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
