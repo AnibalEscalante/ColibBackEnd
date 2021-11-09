@@ -21,8 +21,8 @@ function updateCollaborator(id: string, collaborator: Partial<Collaborator>): Pr
   return repository.updateCollaborator(id, collaborator);
 }
 
-function updateCollaboratorByIdUser(id: string, data: Collaborator) {
-  return repository.updateCollaboratorByIdUser(id, data);
+function updateCollaboratorByIdUser(id: string, collaborator: Collaborator) {
+  return repository.updateCollaboratorByIdUser(id, collaborator);
 }
 
 function deleteCollaborator(id: string){

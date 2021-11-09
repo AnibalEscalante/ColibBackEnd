@@ -41,7 +41,7 @@ function updateContact(id: string, contact: Partial<Contact>): Promise<Contact |
 }
 
 function updateContactByIdUser(id: string, contact: Partial<Contact>): Promise<Contact | null>{
-  return repository.updateContact(id, contact);
+  return repository.updateContactByIdUser(id, contact);
 }
 
 function deleteContact(id: string){
