@@ -3,7 +3,7 @@ import authController from "../auth/auth.controller";
 import projectController from "../project/project.controller";
 import collaboratorController from "../collaborator/collaborator.controller";
 import { Auth } from "../../models/auth.model";
-import { User } from "../../models/user.model";
+import { User } from '../../models/user.model';
 import contactController from "../contact/contact.controller";
 import { Collaborator } from '../../models/collaborator.model';
 import { Contact } from '../../models/contact.model';
@@ -59,12 +59,12 @@ async function getUserCollabProjects(id: string): Promise<any | null>{
   return result;
 }
 
-async function getUserContacts(id: string): Promise<any | null>{
-  const user: User | null = await repository.getUser(id);
-  const result = {
-    idContacts: user?.idContacts
-  };
-  return result;
+async function getUserContacts(id: string): Promise< Partial<User> | null>{
+  const response = await repository.getContactsUser(id);
+  let user: Partial<User> = {
+    idContacts: response?.idContacts
+  }
+  return user;
 }
 
 async function getUserRequestsC(id: string): Promise<any | null>{

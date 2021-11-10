@@ -1,5 +1,6 @@
 import repository from "./message.repository";
 import { Message } from '../../models/message.model';
+import contactController from "../contact/contact.controller";
 
 function getMessages(): Promise<Message[]>{
   return repository.getMessages();
@@ -9,8 +10,12 @@ function getMessage(id: string): Promise<Message | null>{
   return repository.getMessage(id);
 }
 
-function addMessage(message: Message): Promise<Message>{
-  return repository.addMessage(message);
+async function addMessage(message: Message, idReceiver: string, idSender: string): Promise<Message>{
+  const response = await repository.addMessage(message);
+  if (response) {
+    await contactController.addMessage(response._id!, idReceiver, idSender);
+  }
+  return response;
 }
 
 function updateMessage(id: string, message: Partial<Message>): Promise<Message | null>{

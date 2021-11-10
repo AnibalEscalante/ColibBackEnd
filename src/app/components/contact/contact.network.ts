@@ -29,19 +29,6 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.get('byUser/:id', async (req: Request, res: Response) => {
-  const idUser: string = req.params['id'];
-
-  try {
-    const result: Contact[] | null = await controller.getContactByIdUser(idUser);
-    response.success(req, res, result);
-  }
-  catch (error) {
-    console.error(error);
-    response.error(req, res, 'Invalid information', 500);
-  }
-});
-
 router.post('/', async (req: Request, res: Response) => {
   const contact: Contact = req.body;
 

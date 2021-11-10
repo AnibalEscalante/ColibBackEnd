@@ -73,7 +73,7 @@ router.get('/:id/myContacts', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
-    const result: any | null = await controller.getUserContacts(id);
+    const result: Partial<User> | null = await controller.getUserContacts(id);
     response.success(req, res, result);
   }
   catch (error) {
