@@ -29,12 +29,12 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/:idUser', async (req: Request, res: Response) => {
+router.post('/:id', async (req: Request, res: Response) => {
   const project: Project & string = req.body;
-  const idUser: string = req.params['idUser'];
+  const id: string = req.params['id'];
   
   try {
-    const result: Project = await controller.addProject(idUser,project);
+    const result: Project = await controller.addProject(id,project);
     response.success(req, res, result, 201);
   }
   catch (error) {
