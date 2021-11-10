@@ -13,10 +13,6 @@ async function getContactByIdUser(id: string): Promise<Contact | null>{
   return model.findOne({ idUser: id });
 }
 
-async function getContactsByIdUser(id: string): Promise<Contact[] | null>{
-  return model.find({idUser: id});
-}
-
 async function getMyContacts(id: string): Promise<Contact[]>{
   return model.find({ idUser: id });
 }
@@ -50,6 +46,5 @@ export default {
   deleteContact,
   getContactByIdUser,
   getMyContacts,
-  deleteContactByIdUser,
-  getContactsByIdUser
+  deleteContactByIdUser
 };
