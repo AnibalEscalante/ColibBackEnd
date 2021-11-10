@@ -9,6 +9,10 @@ async function getUser(id: string): Promise<User | null>{
   return model.findOne({ _id: id });
 }
 
+async function getContactsUser(id: string): Promise<User | null>{
+  return model.findOne({_id: id }).populate('idContacts','nickName idUser','Contact');
+}
+
 async function getUserByNickName(nick: string): Promise<User | null>{
   return model.findOne({ nickName: nick });
 }
@@ -58,6 +62,7 @@ async function deleteUser(id: string): Promise<User | null>{
 export default {
   getUsers,
   getUser,
+  getContactsUser,
   getUserByNickName,
   addUser,
   updateUser,

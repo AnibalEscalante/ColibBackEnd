@@ -7,6 +7,7 @@ import logModule from "./modules/log.module";
 import mongooseModule from "./modules/mongoose.module";
 import components from "./components";
 import { createServer } from "http";
+import socketIo, { Server } from "socket.io";
 
 async function main(){
   const server: Express = express();
@@ -19,19 +20,17 @@ async function main(){
   server.use('/api', ...components);
 
 
-  let httpServer = createServer(server)
+  let httpServer = createServer(server);
+  const socket = new Server(httpServer, {cors:{origin:"*"}});
  
   try {
     await mongooseModule.connect();
     logModule.success('Database connection successful');
-
+    server.set('socket', socket);
     httpServer.listen(port, () => {
       logModule.success(`Server listening on: http://localhost:${port}`);
   })
     
-    // server.listen(port, () => {
-    //   logModule.success(`Server listening on: http://localhost:${port}`);
-    // });
   } 
   catch (error) {
     logModule.error(`Failed database connection`);

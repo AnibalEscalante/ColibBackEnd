@@ -2,6 +2,7 @@ import express, { Request, Response, Router } from "express";
 import { Message } from '../../models/message.model';
 import response from "../../modules/reponse.module";
 import controller from "./message.controller";
+import { Server } from "socket.io";
 
 const router: Router = express.Router();
 
@@ -31,9 +32,13 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
   const message: Message = req.body;
+  const idReceiver: string = req.body.idReceiver;
+  const idSender: string = req.body.idSender;
 
   try {
-    const result: Message = await controller.addMessage(message);
+    const result: Message = await controller.addMessage(message,idReceiver,idSender);
+    const io: Server = req.app.get('socket');
+    io.emit(idReceiver, message);
     response.success(req, res, result);
   }
   catch (error) {

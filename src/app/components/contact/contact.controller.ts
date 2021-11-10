@@ -10,26 +10,16 @@ function getContact(id: string): Promise<Contact | null>{
   return repository.getContact(id);
 }
 
-async function getContactByIdUser(id: string): Promise<Contact[] | null>{
-  const contactList: Contact[] = await repository.getMyContacts(id);
-  let response: Contact[] = [];
-  for (let current of contactList) {
-    const contact: Contact= {
-      nickName: current.nickName,
-      idUser: current.idUser
-    }
-
-    response.push(contact);
-  }
-  return response;
-}
-
-function getMyContacts(id: string): Promise<Contact[]>{
-  return repository.getMyContacts(id);
+async function addMessage(idMessage: string, idSender: string, idReceiver: string) {
+  let contactSender = await repository.getContact(idSender);
+  let contactReceiver = await repository.getContact(idReceiver);
+  /* if (contactSender) contactSender?.idSentMessages?.push(idMessage);
+  if (contactReceiver) contactReceiver?.idRecievedMessages?.push(idMessage); */
+  return;
 }
 
 async function addContact(newContact: Contact): Promise<Contact>{
-  let contact = await repository.getContactByIdUser(newContact._id!);
+  let contact = await repository.getContactByIdUser(newContact.idUser);
   if (!contact) {
     contact = await repository.addContact(newContact);
   }
@@ -61,8 +51,7 @@ export default {
   getContact,
   updateContact,
   updateContactByIdUser,
+  addMessage,
   deleteContact,
-  getContactByIdUser,
-  getMyContacts,
   deleteContactByIdUser
 };
