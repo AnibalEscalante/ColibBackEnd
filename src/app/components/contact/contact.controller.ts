@@ -13,8 +13,14 @@ function getContact(id: string): Promise<Contact | null>{
 async function addMessage(idMessage: string, idSender: string, idReceiver: string) {
   let contactSender = await repository.getContact(idSender);
   let contactReceiver = await repository.getContact(idReceiver);
-  /* if (contactSender) contactSender?.idSentMessages?.push(idMessage);
-  if (contactReceiver) contactReceiver?.idRecievedMessages?.push(idMessage); */
+  if (contactSender) {
+    contactSender?.idSentMessages?.push(idMessage);
+    repository.updateContact(idSender, contactSender);
+  } 
+  if (contactReceiver) {
+    contactReceiver?.idRecievedMessages?.push(idMessage);
+    repository.updateContact(idReceiver, contactReceiver);
+  } 
   return;
 }
 

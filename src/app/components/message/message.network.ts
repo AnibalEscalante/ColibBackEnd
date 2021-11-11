@@ -31,7 +31,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const message: Message = req.body;
+  const message: Message = req.body as Message;
   const idReceiver: string = req.body.idReceiver;
   const idSender: string = req.body.idSender;
 
