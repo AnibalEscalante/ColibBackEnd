@@ -126,7 +126,7 @@ async function deleteUser(id: string){
   await collaboratorController.deleteCollaboratorByIdUser(id);
   await removeContactInUsers(id);
   await contactController.deleteContactByIdUser(id);
-  await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
+  await projectController.deleteMyProjects(user?.idMyProjects!);
   return repository.deleteUser(id);
 }
 
