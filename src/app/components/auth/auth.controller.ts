@@ -54,7 +54,8 @@ async function login(auth: Auth): Promise<string | null>{
         authFound.token = authModule.sign({ 
           email: email, 
           entity: entity, 
-          authenticated: authenticated._id
+          authenticated: authenticated._id,
+          contact: authenticated.contact
         });
 
 

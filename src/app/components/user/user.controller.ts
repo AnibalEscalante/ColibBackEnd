@@ -88,12 +88,14 @@ async function updateUser(id: string, user: Partial<User & Auth>): Promise<User 
   if (user.email) {
     await authController.updateEmail(id, user as Auth);
   }
-  const updated: Partial<Collaborator & Contact> = {
-    idUser: id,
-    nickName: user.nickName!
+  if (user.nickName) {
+    const updated: Partial<Collaborator & Contact> = {
+      idUser: id,
+      nickName: user.nickName!
+    }
+    await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
+    await contactController.updateContactByIdUser(id, updated as Contact);
   }
-  await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
-  await contactController.updateContactByIdUser(id, updated as Contact);
   return response;
 }
 
@@ -132,7 +134,7 @@ async function deleteUser(id: string){
   await collaboratorController.deleteCollaboratorByIdUser(id);
   await removeContactInUsers(id);
   await contactController.deleteContactByIdUser(id);
-  await projectController.deleteMyProjects(user?.idMyProjects! as string[]);
+  await projectController.deleteMyProjects(user?.idMyProjects!);
   return repository.deleteUser(id);
 }
 
