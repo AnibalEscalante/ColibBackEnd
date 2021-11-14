@@ -27,10 +27,12 @@ async function main(){
     await mongooseModule.connect();
     logModule.success('Database connection successful');
     server.set('socket', socket);
+    socket.on('connection', (io) => {
+      logModule.success('connection: ' + io.id)
+    });
     httpServer.listen(port, () => {
       logModule.success(`Server listening on: http://localhost:${port}`);
-  })
-    
+    })
   } 
   catch (error) {
     logModule.error(`Failed database connection`);

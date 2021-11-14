@@ -5,32 +5,44 @@ import userController from "../user/user.controller";
 import repository from "./auth.repository";
 import { Collaborator } from '../../models/collaborator.model';
 import collaboratorController from "../collaborator/collaborator.controller";
+import { Contact } from "../../models/contact.model";
+import contactController from "../contact/contact.controller";
 
 async function userSignIn(auth: Auth & User): Promise<Auth>{
   try {
     let newUser: User | null = auth as User;
     /* find email */
     let registerUser: Auth | null = await repository.getAuthByEmail(auth.email);
+
     if(registerUser == null){
       newUser = await userController.addUser(newUser);
     }
-      if(newUser?._id && auth.password){
-        auth.authenticated = newUser?._id;
-        auth.password = await authModule.encrypt(auth.password);
-        let authentify: Auth = {
-          email: auth.email,
-          password: auth.password,
-          authenticated: auth.authenticated 
-  
-        }
-        let newCollaborator: Collaborator = {
-          nickName: newUser.nickName,
-          idUser: newUser._id
-        }
-        collaboratorController.addCollaborator(newCollaborator);
-        return repository.addAuth(authentify);
+
+    if(newUser?._id && auth.password){
+      auth.authenticated = newUser?._id;
+      auth.password = await authModule.encrypt(auth.password);
+
+      let authentify: Auth = {
+        email: auth.email,
+        password: auth.password,
+        authenticated: auth.authenticated 
       }
-    
+
+      let newCollaborator: Collaborator = {
+        nickName: newUser.nickName,
+        idUser: newUser._id
+      }
+
+      let newContact: Contact = {
+        nickName: newUser.nickName,
+        idUser: newUser._id
+      }
+
+      collaboratorController.addCollaborator(newCollaborator);
+      contactController.addContact(newContact);
+
+      return repository.addAuth(authentify);
+    }
   }
   catch(error){
     return Promise.reject();
@@ -54,10 +66,8 @@ async function login(auth: Auth): Promise<string | null>{
         authFound.token = authModule.sign({ 
           email: email, 
           entity: entity, 
-          authenticated: authenticated._id,
-          contact: authenticated.contact
+          authenticated: authenticated._id
         });
-
 
         console.log(authModule.verify(authFound.token))
         return authFound.token;
