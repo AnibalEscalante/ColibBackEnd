@@ -16,6 +16,7 @@ async function getUser(id: string): Promise<any | null>{
   const user: User | null = await repository.getUser(id);
   const auth: Auth | null = await authController.getAuthByAuthenticated(id);
   const result = {
+    _id: user?._id,
     nickName: user?.nickName,
     name: user?.name,
     lastName: user?.lastName,
