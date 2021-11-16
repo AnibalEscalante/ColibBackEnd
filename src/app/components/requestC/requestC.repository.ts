@@ -9,6 +9,11 @@ async function getRequestC(id: string): Promise<RequestC | null>{
   return model.findOne({ _id: id });
 }
 
+async function getVerifyRequestC(idUserSender: string, idProject: string): Promise<RequestC | null>{
+  return model.findOne({ idUserSender: idUserSender , idProject: idProject });
+}
+
+
 async function addRequestC(requestC: RequestC): Promise<RequestC>{
   return model.create<RequestC>(requestC);
 }
@@ -24,6 +29,7 @@ async function deleteRequestC(id: string): Promise<RequestC | null>{
 export default {
   getRequestsC,
   getRequestC,
+  getVerifyRequestC,
   addRequestC,
   updateRequestC,
   deleteRequestC

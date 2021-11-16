@@ -4,6 +4,7 @@ export interface Project {
   content: string;
   state: string;
   finishDate: Date;
+  idUser: string;
   idSkills: string[];
   idDisciplines: string[];
   idCollaborators: string[];

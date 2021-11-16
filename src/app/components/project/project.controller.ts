@@ -10,8 +10,12 @@ function getProject(id: string): Promise<Project | null>{
   return repository.getProject(id);
 }
 
-function addProject(project: Project): Promise<Project>{
-  return repository.addProject(project);
+async function addProject(id: string, project: Project): Promise<Project>{
+  const response = await repository.addProject(project);
+  if(response){
+    await userController.addProjectUser(id, response._id!);
+  }
+  return response;
 }
 
 function updateProject(id: string, project: Partial<Project>): Promise<Project | null>{

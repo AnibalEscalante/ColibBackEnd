@@ -7,6 +7,7 @@ const definition: Partial<Record<keyof Project, any>> = {
   content: { type: String, required: true, trim: true },
   state: { type: String, enum: ['Open','Close'], required: true, trim: true },
   finishDate: { type: Date, required: true},
+  idUser: { type: String, required: true},
   idSkills: [{ type: Schema.Types.ObjectId, ref: 'Skill', required: true, trim: true, autopopulate: true }],
   idDisciplines: [{ type: Schema.Types.ObjectId, ref: 'Discipline', required: true, trim: true, autopopulate: true }],
   idCollaborators: [{ type: Schema.Types.ObjectId, ref: 'Collaborator', required: true, trim: true, autopopulate: true }],

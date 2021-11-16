@@ -7,6 +7,7 @@ import { User } from '../../models/user.model';
 import contactController from "../contact/contact.controller";
 import { Collaborator } from '../../models/collaborator.model';
 import { Contact } from '../../models/contact.model';
+import { Project } from "../../models/project.model";
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
@@ -26,6 +27,43 @@ async function getUser(id: string): Promise<any | null>{
     email: auth?.email
   };
   return result;
+}
+
+async function addProjectUser(id:string, idProject: string){
+  const user = await repository.getUser(id);
+  if (user){
+    user?.idMyProjects?.push(idProject);
+    await repository.updateUser(id, user!);
+  }
+  return;
+}
+async function addRequestC(idRequestC: string, idReceiver: string) {
+  let userReceiver = await repository.getUser(idReceiver);
+  if (userReceiver) {
+    userReceiver?.idRequestsC?.push(idRequestC);
+    repository.updateUser(idReceiver, userReceiver);
+  } 
+  return;
+}
+async function addRequestCReply(idRequestC: string, idReceiver: string, idProject: string) {
+  let userReceiver = await repository.getUser(idReceiver);
+  let project = await projectController.getProject(idProject);
+  let collab = await collaboratorController.getCollaboratorByIdUser(idReceiver);
+  if (userReceiver) {
+    userReceiver?.idRequestResults?.push(idRequestC);
+    repository.updateUser(idReceiver, userReceiver);
+    if (project && collab){
+      project.idCollaborators.push(collab._id!);
+      await projectController.updateProject(project._id!, project);
+    }
+  } 
+  return;
+}
+
+async function removeRequestC(idUserSender: string, idRequest: string): Promise<User | null>{
+  let user = await repository.removeRequest(idUserSender,idRequest);
+  console.log(user!.idRequestsC);
+  return user
 }
 
 async function getUserProjects(id: string): Promise<any | null>{
@@ -146,5 +184,9 @@ export default {
   removeContactInUsers,
   removeCollaboratorInProjects,
   getUserRequestsC,
-  getUserContacts
+  getUserContacts,
+  addProjectUser,
+  addRequestC,
+  addRequestCReply,
+  removeRequestC
 };
