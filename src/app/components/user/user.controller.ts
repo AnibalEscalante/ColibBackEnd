@@ -28,11 +28,41 @@ async function getUser(id: string): Promise<any | null>{
   return result;
 }
 
-async function addProjectUser(id:string, project: Project & string){
+async function addProjectUser(id:string, idProject: string){
   const user = await repository.getUser(id);
-  user?.idMyProjects?.push(project);
-  await repository.updateUser(id, user!);
+  if (user){
+    user?.idMyProjects?.push(idProject);
+    await repository.updateUser(id, user!);
+  }
   return;
+}
+async function addRequestC(idRequestC: string, idReceiver: string) {
+  let userReceiver = await repository.getUser(idReceiver);
+  if (userReceiver) {
+    userReceiver?.idRequestsC?.push(idRequestC);
+    repository.updateUser(idReceiver, userReceiver);
+  } 
+  return;
+}
+async function addRequestCReply(idRequestC: string, idReceiver: string, idProject: string) {
+  let userReceiver = await repository.getUser(idReceiver);
+  let project = await projectController.getProject(idProject);
+  let collab = await collaboratorController.getCollaboratorByIdUser(idReceiver);
+  if (userReceiver) {
+    userReceiver?.idRequestResults?.push(idRequestC);
+    repository.updateUser(idReceiver, userReceiver);
+    if (project && collab){
+      project.idCollaborators.push(collab._id!);
+      await projectController.updateProject(project._id!, project);
+    }
+  } 
+  return;
+}
+
+async function removeRequestC(idUserSender: string, idRequest: string): Promise<User | null>{
+  let user = await repository.removeRequest(idUserSender,idRequest);
+  console.log(user!.idRequestsC);
+  return user
 }
 
 async function getUserProjects(id: string): Promise<any | null>{
@@ -154,5 +184,8 @@ export default {
   removeCollaboratorInProjects,
   getUserRequestsC,
   getUserContacts,
-  addProjectUser
+  addProjectUser,
+  addRequestC,
+  addRequestCReply,
+  removeRequestC
 };
