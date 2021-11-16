@@ -10,16 +10,20 @@ function getContact(id: string): Promise<Contact | null>{
   return repository.getContact(id);
 }
 
-async function addMessage(idMessage: string, idSender: string, idReceiver: string) {
-  let contactSender = await repository.getContact(idSender);
-  let contactReceiver = await repository.getContact(idReceiver);
+function getContactByIdUser(id: string): Promise<Contact | null>{
+  return repository.getContactByIdUser(id);
+}
+
+async function addMessage(idMessage: string, idReceiver: string, idSender: string) {
+  let contactSender = await repository.getContactByIdUser(idSender);
+  let contactReceiver = await repository.getContactByIdUser(idReceiver);
   if (contactSender) {
     contactSender?.idSentMessages?.push(idMessage);
-    repository.updateContact(idSender, contactSender);
+    repository.updateContactByIdUser(idSender, contactSender);
   } 
   if (contactReceiver) {
     contactReceiver?.idRecievedMessages?.push(idMessage);
-    repository.updateContact(idReceiver, contactReceiver);
+    repository.updateContactByIdUser(idReceiver, contactReceiver);
   } 
   return;
 }
@@ -55,6 +59,7 @@ export default {
   addContact,
   getContacts,
   getContact,
+  getContactByIdUser,
   updateContact,
   updateContactByIdUser,
   addMessage,
