@@ -7,7 +7,6 @@ import { User } from '../../models/user.model';
 import contactController from "../contact/contact.controller";
 import { Collaborator } from '../../models/collaborator.model';
 import { Contact } from '../../models/contact.model';
-import { Project } from "../../models/project.model";
 
 function getUsers(): Promise<User[]>{
   return repository.getUsers();
@@ -20,6 +19,7 @@ async function getUser(id: string): Promise<any | null>{
     _id: user?._id,
     nickName: user?.nickName,
     name: user?.name,
+    profileImg: user?.profileImg,
     lastName: user?.lastName,
     movilPhone: user?.movilPhone,
     idSkills: user?.idSkills,

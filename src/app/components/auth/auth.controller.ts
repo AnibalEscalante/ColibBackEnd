@@ -30,12 +30,14 @@ async function userSignIn(auth: Auth & User): Promise<Auth>{
 
       let newCollaborator: Collaborator = {
         nickName: newUser.nickName,
-        idUser: newUser._id
+        idUser: newUser._id,
+        profileImg: newUser.profileImg
       }
 
       let newContact: Contact = {
         nickName: newUser.nickName,
-        idUser: newUser._id
+        idUser: newUser._id,
+        profileImg: newUser.profileImg
       }
 
       collaboratorController.addCollaborator(newCollaborator);

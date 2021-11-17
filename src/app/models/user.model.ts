@@ -4,6 +4,7 @@ export interface User {
   name: string;
   lastName: string;
   movilPhone?: string;
+  profileImg: string;
   idDisciplines?: string[];
   idSkills?: string[];
   idSavedProjects?: string[];

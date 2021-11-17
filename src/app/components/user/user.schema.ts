@@ -7,6 +7,7 @@ const definition: Partial<Record<keyof User, any>> = {
   name: { type: String, required: true, trim: true },
   lastName: { type: String, required: true, trim: true },
   movilPhone: { type: String, trim: true },
+  profileImg: { type: String},
   idDisciplines: [{ type: Schema.Types.ObjectId,  ref: 'Discipline', trim: true, autopopulate: true }],
   idSkills: [{ type: Schema.Types.ObjectId,  ref: 'Skill', trim: true, autopopulate: true }],
   idSavedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project', trim: true, autopopulate: true }],
