@@ -4,6 +4,7 @@ import { Contact } from '../../models/contact.model';
 const definition: Partial<Record<keyof Contact, any>> = {
   
   nickName: { type: String, required: true, trim: true },
+  profileImg: { type: String},
   idUser: { type: String, required: true },
   idSentMessages: [{ type: Schema.Types.ObjectId, ref: 'Message', autopopulate: true }],
   idRecievedMessages: [{ type: Schema.Types.ObjectId,  ref: 'Message', autopopulate: true }]
