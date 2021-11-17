@@ -95,6 +95,19 @@ router.get('/:id/requestsC', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/:id/requestsC/reply', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+
+  try {
+    const result: any | null = await controller.getUserRequestsCReply(id);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const user: Partial<User & Auth> = req.body;
   const id: string = req.params['id'];

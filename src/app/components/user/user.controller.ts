@@ -106,6 +106,14 @@ async function getUserRequestsC(id: string): Promise<any | null>{
   return result;
 }
 
+async function getUserRequestsCReply(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idRequestResults: user?.idRequestResults
+  };
+  return result;
+}
+
 async function addUser(newUser: User): Promise<User | null> {
   const user = await repository.getUserByNickName(newUser.nickName);
   if (user == null) {
@@ -184,9 +192,11 @@ export default {
   removeContactInUsers,
   removeCollaboratorInProjects,
   getUserRequestsC,
+  getUserRequestsCReply,
   getUserContacts,
   addProjectUser,
   addRequestC,
   addRequestCReply,
-  removeRequestC
+  removeRequestC,
+  
 };
