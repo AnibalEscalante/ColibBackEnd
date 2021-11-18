@@ -40,8 +40,12 @@ function updateContact(id: string, contact: Partial<Contact>): Promise<Contact |
   return repository.updateContact(id, contact);
 }
 
-function updateContactByIdUser(id: string, contact: Partial<Contact>): Promise<Contact | null>{
-  return repository.updateContactByIdUser(id, contact);
+async function updateContactByIdUser(id: string, contact: Partial<Contact>) {
+  let contacts = await repository.getContactsByIdUser(id);
+  for (let current of contacts) {
+    if (current._id) await repository.updateContact(current._id, contact);
+  }
+  return;
 }
 
 function deleteContact(id: string){

@@ -122,7 +122,8 @@ async function updateUser(id: string, user: Partial<User & Auth>): Promise<User 
   if (user.nickName) {
     const updated: Partial<Collaborator & Contact> = {
       idUser: id,
-      nickName: user.nickName!
+      nickName: user.nickName,
+      profileImg: user.profileImg
     }
     await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
     await contactController.updateContactByIdUser(id, updated as Contact);
