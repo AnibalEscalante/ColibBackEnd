@@ -1,6 +1,8 @@
 import repository from "./contact.repository";
 import { Contact } from '../../models/contact.model';
 import messageController from "../message/message.controller";
+import userController from "../user/user.controller";
+import { User } from '../../models/user.model';
 
 function getContacts(): Promise<Contact[]>{
   return repository.getContacts();
@@ -28,12 +30,14 @@ async function addMessage(idMessage: string, idReceiver: string, idSender: strin
   return;
 }
 
-async function addContact(newContact: Contact): Promise<Contact>{
-  let contact = await repository.getContactByIdUser(newContact.idUser);
-  if (!contact) {
-    contact = await repository.addContact(newContact);
+async function addContact(newContact: Contact, idUser: string): Promise<Contact>{
+  let contact: Contact = await repository.addContact(newContact);
+  let user: User | null = await userController.getOnlyUser(idUser);
+  if (user && contact) {
+    user.idContacts?.push(contact._id!);
+    await userController.updateUser(idUser, user);
   }
-  return contact!;
+  return contact;
 }
 
 function updateContact(id: string, contact: Partial<Contact>): Promise<Contact | null>{
@@ -48,7 +52,11 @@ async function updateContactByIdUser(id: string, contact: Partial<Contact>) {
   return;
 }
 
-function deleteContact(id: string){
+async function deleteContact(id: string, idUser: string) {
+  let user: User | null = await userController.getOnlyUser(idUser);
+  if (user) {
+    await userController.removeContactInUser(idUser, id);
+  }
   return repository.deleteContact(id);
 }
 
