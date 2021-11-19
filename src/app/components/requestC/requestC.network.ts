@@ -62,6 +62,22 @@ router.post('/reply', async (req: Request, res: Response) => {
   }
 });
 
+router.post('/reply/rejected', async (req: Request, res: Response) => {
+  const requestC: RequestC = req.body as RequestC;
+  const idReceiver: string = req.body.idReceiver;
+
+  try {
+    const result: RequestC = await controller.addRequestCReplyRejected(requestC,idReceiver);
+    const io: Server = req.app.get('socket');
+    io.emit(idReceiver, requestC);
+    response.success(req, res, result);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const requestC: Partial<RequestC> = req.body;
   const id: string = req.params['id'];
@@ -77,6 +93,20 @@ router.patch('/:id', async (req: Request, res: Response) => {
 });
 
 router.delete('/:id/:idUserSender', async (req: Request, res: Response) => {
+  const id: string = req.params['id'];
+  const idUserSender: string = req.params['idUserSender'];
+
+  try {
+    const result: RequestC | null = await controller.deleteRequestC(id, idUserSender);
+    response.success(req, res, result, 200);
+  }
+  catch (error) {
+    console.error(error);
+    response.error(req, res, 'Invalid information', 500);
+  }
+});
+
+router.delete('/reply/:id/:idUserSender', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
   const idUserSender: string = req.params['idUserSender'];
 

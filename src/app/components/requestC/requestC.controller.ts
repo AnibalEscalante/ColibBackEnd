@@ -30,6 +30,14 @@ async function addRequestCReply(requestC: RequestC, idReceiver: string): Promise
   return response;
 }
 
+async function addRequestCReplyRejected(requestC: RequestC, idReceiver: string): Promise<RequestC>{
+  const response = await repository.addRequestC(requestC);
+  if (response) {
+    await userController.addRequestCReplyRejected(response._id!, idReceiver);
+  }
+  return response;
+}
+
 
 function updateRequestC(id: string, request: Partial<RequestC>): Promise<RequestC | null>{
   return repository.updateRequestC(id, request);
@@ -43,11 +51,22 @@ async function deleteRequestC(id: string, idUserSender: string): Promise<Request
   return repository.deleteRequestC(id);
 }
 
+async function deleteRequestCReply(id: string, idUserSender: string): Promise<RequestC | null>{
+  let user = await userController.getUser(idUserSender);
+  if(user){
+    await userController.removeRequestCReply(idUserSender, id)
+  }
+  return repository.deleteRequestC(id);
+}
+
+
 export default {
   addRequestC,
   getRequestsC,
   getRequestC,
   updateRequestC,
   deleteRequestC,
-  addRequestCReply
+  addRequestCReply,
+  deleteRequestCReply,
+  addRequestCReplyRejected
 };

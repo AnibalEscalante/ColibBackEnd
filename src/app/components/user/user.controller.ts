@@ -55,6 +55,7 @@ async function addRequestCReply(idRequestC: string, idReceiver: string, idProjec
   let collab = await collaboratorController.getCollaboratorByIdUser(idReceiver);
   if (userReceiver) {
     userReceiver?.idRequestResults?.push(idRequestC);
+    userReceiver?.idCollaboratingProjects?.push(project!._id!)
     repository.updateUser(idReceiver, userReceiver);
     if (project && collab){
       project.idCollaborators.push(collab._id!);
@@ -64,9 +65,22 @@ async function addRequestCReply(idRequestC: string, idReceiver: string, idProjec
   return;
 }
 
+async function addRequestCReplyRejected(idRequestC: string, idReceiver: string) {
+  let userReceiver = await repository.getUser(idReceiver);
+  if (userReceiver) {
+    userReceiver?.idRequestResults?.push(idRequestC);
+    repository.updateUser(idReceiver, userReceiver);
+   
+  } 
+  return;
+}
+
 async function removeRequestC(idUserSender: string, idRequest: string): Promise<User | null>{
   let user = await repository.removeRequest(idUserSender,idRequest);
-  console.log(user!.idRequestsC);
+  return user
+}
+async function removeRequestCReply(idUserSender: string, idRequestReply: string): Promise<User | null>{
+  let user = await repository.removeRequestReply(idUserSender,idRequestReply);
   return user
 }
 
@@ -106,6 +120,14 @@ async function getUserRequestsC(id: string): Promise<any | null>{
   const user: User | null = await repository.getUser(id);
   const result = {
     idRequestsC: user?.idRequestsC
+  };
+  return result;
+}
+
+async function getUserRequestsCReply(id: string): Promise<any | null>{
+  const user: User | null = await repository.getUser(id);
+  const result = {
+    idRequestResults: user?.idRequestResults
   };
   return result;
 }
@@ -196,9 +218,12 @@ export default {
   removeContactInUser,
   removeCollaboratorInProjects,
   getUserRequestsC,
+  getUserRequestsCReply,
   getUserContacts,
   addProjectUser,
   addRequestC,
   addRequestCReply,
-  removeRequestC
+  removeRequestC,
+  removeRequestCReply,
+  addRequestCReplyRejected
 };
