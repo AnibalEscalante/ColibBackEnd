@@ -64,6 +64,15 @@ async function removeRequest(idUserSender: string, idRequest: string): Promise<U
       }
     });
 }
+async function removeRequestReply(idUserSender: string, idRequestReply: string): Promise<User | null>{
+  return model.findByIdAndUpdate(
+    { _id: idUserSender },
+    {
+      $pull: {
+        idRequestResults: { _id : idRequestReply }
+      }
+    });
+}
 
 async function deleteUser(id: string): Promise<User | null>{
   return model.findOneAndRemove({_id: id});
@@ -80,5 +89,6 @@ export default {
   removeSavedProject,
   removeCollaboratingProject,
   removeContact,
-  removeRequest
+  removeRequest,
+  removeRequestReply
 };

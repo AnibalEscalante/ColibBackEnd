@@ -29,7 +29,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.get('userBy/:id', async (req: Request, res: Response) => {
+router.get('/userBy/:id', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
 
   try {
