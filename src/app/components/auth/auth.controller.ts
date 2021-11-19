@@ -34,14 +34,7 @@ async function userSignIn(auth: Auth & User): Promise<Auth>{
         profileImg: newUser.profileImg
       }
 
-      let newContact: Contact = {
-        nickName: newUser.nickName,
-        idUser: newUser._id,
-        profileImg: newUser.profileImg
-      }
-
       collaboratorController.addCollaborator(newCollaborator);
-      contactController.addContact(newContact);
 
       return repository.addAuth(authentify);
     }

@@ -30,10 +30,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const contact: Contact = req.body;
-
+  const contact: Contact = req.body as Contact;
+  const idUser: string = req.body.myId;
   try {
-    const result: Contact | null = await controller.addContact(contact);
+    const result: Contact | null = await controller.addContact(contact, idUser);
     response.success(req, res, result, 200);
   }
   catch (error) {
@@ -56,11 +56,11 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id/:idUser', async (req: Request, res: Response) => {
   const id: string = req.params['id'];
-
+  const idUser: string = req.params['idUser'];
   try {
-    const result: Contact | null = await controller.deleteContact(id);
+    const result: Contact | null = await controller.deleteContact(id, idUser);
     response.success(req, res, result, 200);
   }
   catch (error) {

@@ -45,12 +45,12 @@ async function removeCollaboratingProject(idUser: string, idProject: string): Pr
     });
 }
 
-async function removeContact(id: string, idUserRemove: string): Promise<User | null>{
+async function removeContact(id: string, idContactRemove: string): Promise<User | null>{
   return model.findOneAndUpdate(
     { _id: id },
     {
       $pull: {
-        idContacts: { idUser : idUserRemove }
+        idContacts: { idUser : idContactRemove }
       }
     });
 }
