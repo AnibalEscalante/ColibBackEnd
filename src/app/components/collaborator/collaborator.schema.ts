@@ -4,7 +4,7 @@ import { Collaborator } from '../../models/collaborator.model';
 const definition: Partial<Record<keyof Collaborator, any>> = {
   
   nickName: { type: String, required: true, trim: true },
-  profileImg: { type: String},
+  profileImg: { type: String },
   idUser: { type: String, required: true}
 };
 

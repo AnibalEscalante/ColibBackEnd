@@ -29,6 +29,10 @@ async function getUser(id: string): Promise<any | null>{
   return result;
 }
 
+async function getOnlyUser(id: string): Promise<User | null>{
+  return repository.getUser(id);
+}
+
 async function addProjectUser(id:string, idProject: string){
   const user = await repository.getUser(id);
   if (user){
@@ -144,7 +148,8 @@ async function updateUser(id: string, user: Partial<User & Auth>): Promise<User 
   if (user.nickName) {
     const updated: Partial<Collaborator & Contact> = {
       idUser: id,
-      nickName: user.nickName!
+      nickName: user.nickName,
+      profileImg: user.profileImg
     }
     await collaboratorController.updateCollaboratorByIdUser(id, updated as Collaborator);
     await contactController.updateContactByIdUser(id, updated as Contact);
@@ -172,6 +177,11 @@ async function removeContactInUsers(id: string) {
   return;
 }
 
+async function removeContactInUser(idUser: string, idContact: string) {
+  await repository.removeContact(idUser, idContact);
+  return;
+}
+
 async function removeCollaboratorInProjects(id: string) {
   const projects = await projectController.getProjects();
   for (let project of projects) {
@@ -195,6 +205,7 @@ export default {
   addUser,
   getUsers,
   getUser,
+  getOnlyUser,
   updateUser,
   changePassword,
   deleteUser,
@@ -204,6 +215,7 @@ export default {
   removeSavedProject,
   removeCollaboratingProject,
   removeContactInUsers,
+  removeContactInUser,
   removeCollaboratorInProjects,
   getUserRequestsC,
   getUserRequestsCReply,
